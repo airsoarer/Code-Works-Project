@@ -8,6 +8,8 @@
         storageBucket: "undecided-9c63e.appspot.com",
         messagingSenderId: "955262371102"
     };
+    var finishedClickCount = 0;
+    var unfinishedClickCount = 0;
 
 function init(){
     firebase.initializeApp(config);
@@ -152,24 +154,20 @@ function changeData(){
 }
 
 function toggleFinished(){
-    var clickCount;
-    clickCount++;
-
-    if(clickCount % 2 === 0){
-        $('.projects').hide();
+    finishedClickCount++;
+    if(finishedClickCount % 2 === 0){
+        $('.finished').hide();
     }else{
-        $('.projects').show();
+        $('.finished').show();
     }
 }
 
 function toggleUnfinished(){
-    var clickCount;
-    clickCount++;
-
-    if(clickCount % 2 === 0){
-        $('.finished').hide();
+    unfinishedClickCount++;
+    if(unfinishedClickCount % 2 === 0){
+        $('.projects').hide();
     }else{
-        $('.finished').show();
+        $('.projects').show();
     }
 }
 })();

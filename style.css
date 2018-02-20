@@ -64,8 +64,9 @@ div{
     font-size: 20px;
     /* margin-bottom: 50px; */
     margin-top: 15px;
+    margin-left: 20px;
 }
 
 .buttons button{
-    width: 200px;
+    width: 300px;
 }
