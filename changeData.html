@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link rel="stylesheet" href="add.css">
+        <link rel="stylesheet" href="changeData.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    
+        <!-- Scripts -->
+        <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script src="changeData.js"></script>
+</head>
+<body>
+    <div class="topBar">
+        <a href="index.html"><img src="goBack.svg" alt=""></a>           
+        <h3><u>Change Data</u></h3>
+    </div>
+    <div class="input">
+        <div class="nameDiv">
+            <input type="text" id="name" placeholder="Enter new Project Name:">
+        </div>
+        <div class="startDateDiv">
+            <input type="date" id="startDate" placeholder="Enter new Start Date:">
+        </div>
+        <div class="endDateDiv">
+            <input type="date" id="endDate" placeholder="Enter new End Date:">
+        </div>
+        <div class="contributorsDiv">
+            <h6 style="color: red;">SPACE NAMES WITH A COMMA!!</h6>
+            <input type="text" id="contributors" placeholder="Enter new Contributors:">
+        </div>
+        <div class="percentageDiv">
+            <input type="text" id="percent" placeholder="Enter new completion percentage:">
+        </div>
+        <div class="descriptionDiv">
+            <input type="text" id="description" placeholder="Enter new Description:">
+        </div>
+    </div>
+    <button class="change">Change Data</button>
+</body>
+</html>
