@@ -8,8 +8,8 @@
         storageBucket: "undecided-9c63e.appspot.com",
         messagingSenderId: "955262371102"
     };
-    var finishedClickCount = 0;
-    var unfinishedClickCount = 0;
+    var finishedClickCount = 1;
+    var unfinishedClickCount = 1;
 
 function init(){
     firebase.initializeApp(config);
@@ -21,7 +21,8 @@ function init(){
 
         //Create div for info
         var projectDiv = document.createElement("div");
-        projectDiv.className = "project";
+        projectDiv.classList.add("project");
+        projectDiv.classList.add("col.s12");
         projectDiv.id = key + "div";
 
         //Create div for information except the Project Name
@@ -31,18 +32,19 @@ function init(){
 
         //Div for timeline Bar
         var timelineDiv = document.createElement("div");
-        timelineDiv.className = "timelineBar";
+        timelineDiv.classList.add("row");
+        timelineDiv.classList.add();
         timelineDiv.id = key + "timelineBar";
 
         //Div for dates
         var datesDiv = document.createElement("div");
-        datesDiv.className = "datesDiv";
+        datesDiv.classList.add("row");
         datesDiv.id = key + "datesDiv";
         timelineDiv.appendChild(datesDiv);
 
         //Start Date Div
         var start = document.createElement("div");
-        start.className = "startDate";
+        start.classList.add("col.s6");
         start.id = key + "startDate";
         $(start).css("float", "left");
         datesDiv.appendChild(start);
@@ -55,7 +57,7 @@ function init(){
 
         //End Date Div
         var end = document.createElement("div");
-        end.className = "endDate";
+        end.className = "col s6";
         $(end).css("float", "right");
         datesDiv.appendChild(end);
 
@@ -84,38 +86,49 @@ function init(){
         var dates = document.createElement("div");
         dates.className = "datesHome";
 
+        //Description and Contributors Div
+        var div = document.createElement("div");
+
         //Contributors Div
         var people = document.createElement("div");
-        people.className = "people";
+        people.classList.add("col.s6");
+        people.classList.add("people")
+        div.appendChild(people);
 
         //Description Div
         var description = document.createElement("div");
-        description.className = "descript";
+        description.classList.add("col.s6");
+        description.classList.add("descript");
+        div.appendChild(description);
 
         //Project Name Element 
         var projectName = document.createElement("h3");
         projectName.textContent = data.ProjectName;
         name.appendChild(projectName);
 
-        // Change info Button Element
+        //Change info Button Element
         var button = document.createElement("button");
         button.textContent = "Change Data";
-        button.className = "changeData";
+        button.className = "col s4 offset-s4";
+        button.classList.add("changeData");
         button.id = key + "button";
 
         //Project Start Date Element
         var projectStart = document.createElement("h5");
         projectStart.textContent = "Start Date: "  + data.StartDate;
-        projectStart.className = "start";
+        projectStart.className = "col s6";
         dates.appendChild(projectStart);
 
         //Project End Date Element
         var projectEnd = document.createElement("h5");
         projectEnd.textContent = "End Date: " + data.EndDate;
-        projectEnd.className = "end";
+        projectEnd.className = "col s6";
         dates.appendChild(projectEnd);
 
         //Contributors Element (For loop to loop through array of names gotten from Firebase)
+        var h2 = document.createElement("h4");
+        h2.textContent = "Developers:";
+        $(h2).css("font-weight", "bold");
         var projectContributorsList = document.createElement('ul');
         var contributors = data.Contributors;
         for(var i = 0; i < contributors.length; i++){
@@ -123,23 +136,34 @@ function init(){
             item.textContent = contributors[i];
             projectContributorsList.appendChild(item);
         }
+        people.appendChild(h2);
         people.appendChild(projectContributorsList);
 
         //Project Description Div
+        var h4 = document.createElement("h4");
+        h4.textContent = "Description:";
+        $(h4).css("font-weight", "bold");
         var projectDescription = document.createElement("h5");
-        projectDescription.textContent = "Description: " + data.Description;
+        if(data.Description === ""){
+            projectDescription.textContent = "No Description"
+        }else{
+            projectDescription.textContent = data.Description;
+        }
+        $(description).append(h4);
         $(description).append(projectDescription);
 
         //Append Elements to their respective Divs
-        dates.appendChild(button);
         $(projectDiv).append(name);
         $(projectInfoDiv).append(dates);
-        $(projectInfoDiv).append(people);
-        $(projectInfoDiv).append(description);
+        $(projectInfoDiv).append(div);
         $(projectInfoDiv).append(timelineDiv);
         $(projectDiv).append(projectInfoDiv);
-        document.getElementById('projects').appendChild(projectDiv);
-
+        projectDiv.appendChild(button);
+        if(data.Percentage === "100%"){
+            document.getElementById('finished').appendChild(projectDiv);
+        }else{
+            document.getElementById('projects').appendChild(projectDiv);
+        }
     });
     $(document.body).on('click','.changeData', changeData);
     $(document.body).on('click', '#toggleUnfinished', toggleUnfinished);
@@ -156,18 +180,18 @@ function changeData(){
 function toggleFinished(){
     finishedClickCount++;
     if(finishedClickCount % 2 === 0){
-        $('.finished').hide();
+        $('#finished').hide();
     }else{
-        $('.finished').show();
+        $('#finished').show();
     }
 }
 
 function toggleUnfinished(){
     unfinishedClickCount++;
     if(unfinishedClickCount % 2 === 0){
-        $('.projects').hide();
+        $('#projects').hide();
     }else{
-        $('.projects').show();
+        $('#projects').show();
     }
 }
 })();

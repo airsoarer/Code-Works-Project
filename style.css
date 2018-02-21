@@ -1,41 +1,29 @@
 body{
     padding: 0px;
     margin: 0px;
-}
-
-.name{
-    margin-right: 20px;
+    font-size: 24px;
 }
 
 .project{
-    height: 300px;
-    text-align: left;
-    margin-left: 10px;
-    margin-bottom: 100px;
+    margin-bottom: 140px;
+}
+
+.project:first-of-type{
+    margin-top: 50px;
+}
+
+.project:last-of-type{
+    margin-bottom: 50px;
 }
 
 .extraInfoDisplay{
-    width: 100%;
     display: inline-block;
 }
 
-.start{
-    width: 49%;
-}
-
-.end{
-    width: 49%;
-}
-
 .datesHome{
-    width: 100%;
     padding: 0px;
     margin: 0px;
     display:inline-flex;
-}
-
-.people{
-    width: 50%;
 }
 
 ul{
@@ -47,26 +35,7 @@ li{
     font-size: 24px;  
 }
 
-div{
-    padding: 0px;
-    margin: 0px;
-}
-
-/* button{
-    float: right;
-    width: 200px;
-    height:  50px;
-} */
-
-.buttons{
-    height: 100px;
-    float: right;
-    font-size: 20px;
-    /* margin-bottom: 50px; */
-    margin-top: 15px;
-    margin-left: 20px;
-}
-
-.buttons button{
-    width: 300px;
+hr{
+    border: none;
+    border-radius: 5px;
 }

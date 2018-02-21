@@ -40,17 +40,7 @@ body{
     text-align: center;
 }
 
-.startDate{
-    width: 50%;
-    height: 100%;
-}
-
-.endDate{
-    width: 50%;
-    height: 100%;
-}
-
-.dates{
+#dates{
     height: 200px;
     font-size: 50px;
     background-color: #379683 !important;
@@ -95,10 +85,6 @@ body{
     margin-bottom: 0px;
 }
 
-div{
-    padding-bottom: 50px;
-}
-
 input{
     background-color: transparent;
     color: #edf5e1 !important;
@@ -115,12 +101,10 @@ textarea{
 
 button{
     background-color: #379683 !important;
+    border-radius: 5px;
     color: #edf5e1 !important;
-    /* box-shadow: 5px 5px 80px 2px #379683 !important; */
-    width: 25%;
-    height: 50px;
-    margin-top: 5px;
-    font-size: 18px;
+    border: none;
+    padding: 5px;
 }
 
 img{
