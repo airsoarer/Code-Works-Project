@@ -19,35 +19,41 @@ function init(){
     ref.once('value', function(snapshot){
         var data = snapshot.val();  
         
-        //Project Name Element
-        var name = document.createElement("h4");
-        name.textContent = "Project Name: " + data.ProjectName;
-        $('.nameDiv').prepend(name);
+        // //Project Name Element
+        // var name = document.createElement("h4");
+        // name.textContent = "Project Name: " + data.ProjectName;
+        // $('.nameDiv').prepend(name);
 
         //Project Start Date Element
         var startDate = document.createElement("h4");
         startDate.textContent = "Start Date: " + data.StartDate; 
         $('.startDateDiv').prepend(startDate);
 
+        /*
         //Project End Date Element
         var endDate = document.createElement("h4");
         endDate.textContent = "End Date: " + data.EndDate;
         $('.endDateDiv').prepend(endDate);
+        */
 
+        /*
         //Project Contributors Element
         var contributors = document.createElement("h4");
         contributors.textContent = "Contributors:  " + data.Contributors;
         $('.contributorsDiv').prepend(contributors);
+        */
 
         //Project Percentage Element
         var percentage = document.createElement("h4");
         percentage.textContent = "Percentage: " + data.Percentage;
         $('.percentageDiv').prepend(percentage);
 
+        /*
         //Project Description Element 
         var description = document.createElement("h4");
         description.textContent = "Description: " + data.Description;
         $('.descriptionDiv').prepend(description);
+        */
     });
     $(document.body).on('click', '.change', changeData);
 }
@@ -72,12 +78,12 @@ function changeData(){
 
     //Create Object with new item upload
     var items = {
-        ProjectName:name,
+        //ProjectName:name,
         StartDate:startDate,
-        EndDate:endDate,
-        Contributors:contributors,
+        //EndDate:endDate,
+        //Contributors:contributors,
         Percentage:percentage,
-        Description:description,
+        //Description:description,
     }
 
     //Pull data from data from Firebase for empty input fields
