@@ -13,162 +13,209 @@
 
 function init(){
     firebase.initializeApp(config);
-    //Get reference to Firebase
-    var ref = firebase.database().ref('Projects');
-    ref.on('child_added', function(snapshot){
+    $.getJSON("https://api.trello.com/1/boards/6PVLjz20/?key=ad18609bec500062f9944b092d1601de&token=8a16dca9b23c590fdd6819d5b3123a3656eec64fba10bafd5f84f9cc44369b48&cards=all", function(results){
+        for(var i = 0; i < results.cards.length; i++){
+            var id = results.cards[i].id;
+            var due = results.cards[i].due;
+            if(due === null){
+                due = "No Due Date Given in Trello";
+            }else{
+                due = due.split("-");
+                var dueTwo = due[2];
+                dueTwo = String(dueTwo);
+                dueTwo = dueTwo.split("T");
+                due = due[1] + "/" + dueTwo[0] + "/" + due[0];
+            }
+            var apiName = results.cards[i].name;
+            var desc = results.cards[i].desc;
+
+            //Create div for project
+            var projectDiv = document.createElement("div");
+            projectDiv.classList.add("project");
+            projectDiv.classList.add("col.s12");
+            projectDiv.id = id + "div";
+
+            //Create div for information except the Project Name
+            var projectInfoDiv = document.createElement("div");
+            projectInfoDiv.className = "extraInfoDisplay";
+            projectInfoDiv.id = id + "extraInfoDiv";
+
+            //Div for timeline Bar
+            var timelineDiv = document.createElement("div");
+            timelineDiv.classList.add("row");
+            timelineDiv.classList.add();
+            timelineDiv.id = id + "timelineBar";
+
+            //Div for dates
+            var datesDiv = document.createElement("div");
+            datesDiv.classList.add("row");
+            datesDiv.id = id + "datesDiv";
+            timelineDiv.appendChild(datesDiv);
+
+            //End Date Div
+            var end = document.createElement("div");
+            end.className = "col s6";
+            $(end).css("float", "right");
+            datesDiv.appendChild(end);
+
+            //End date
+            var endTxt = document.createElement("h4");
+            endTxt.className = "endTxt";
+            endTxt.textContent = due;
+            $(endTxt).css("float", "right");
+            end.appendChild(endTxt);
+
+            //Project Name Div
+            var name = document.createElement("div");
+            name.className = "name";
+
+            //Project dates div
+            var dates = document.createElement("div");
+            dates.className = "datesHome";
+
+            //Description and Contributors Div
+            var div = document.createElement("div");
+
+            //Contributors Div
+            var people = document.createElement("div");
+            people.classList.add("col.s6");
+            people.classList.add("people")
+            div.appendChild(people);
+
+            //Description Div
+            var description = document.createElement("div");
+            description.classList.add("col.s6");
+            description.classList.add("descript");
+            div.appendChild(description);
+
+            //Project Name Element 
+            var projectName = document.createElement("h3");
+            projectName.textContent = apiName;
+            name.appendChild(projectName);
+
+            //Change info Button Element
+            var button = document.createElement("button");
+            button.textContent = "Change Data";
+            button.className = "col s4 offset-s4";
+            button.classList.add("changeData");
+            button.id = id + "button";
+
+            //Project End Date Element
+            var projectEnd = document.createElement("h5");
+            projectEnd.textContent = "End Date: " + due;
+            projectEnd.className = "col s6";
+            dates.appendChild(projectEnd);
+
+            //Project Description Div
+            var h4 = document.createElement("h4");
+            h4.textContent = "Description:";
+            $(h4).css("font-weight", "bold");
+            var projectDescription = document.createElement("h5");
+            if(desc === ""){
+                projectDescription.textContent = "No Description"
+            }else{
+                projectDescription.textContent = desc;
+            }
+            $(description).append(h4);
+            $(description).append(projectDescription);
+
+            //Append Elements to their respective Divs
+            $(projectDiv).append(name);
+            $(projectInfoDiv).append(dates);
+            $(projectInfoDiv).append(div);
+            $(projectInfoDiv).append(timelineDiv);
+            $(projectDiv).append(projectInfoDiv);
+            projectDiv.appendChild(button);
+            $(document.body).on('click','.changeData', changeData);
+            $(document.body).on('click', '#toggleUnfinished', toggleUnfinished);
+            $(document.body).on('click', '#toggleFinished', toggleFinished)
+            developers(people, results);
+            function developers(people, results){
+                var cardID = results.cards[i].shortLink;
+                $.getJSON("https://api.trello.com/1/cards/" + cardID + "/members?key=ad18609bec500062f9944b092d1601de&token=8a16dca9b23c590fdd6819d5b3123a3656eec64fba10bafd5f84f9cc44369b48&cards=all", function(results){
+                    //Contributors Element 
+                    var h2 = document.createElement("h4");
+                    h2.textContent = "Developers:";
+                    $(h2).css("font-weight", "bold");
+                    var projectContributorsList = document.createElement('ul');
+                    for(var i = 0; i < results.length; i++){
+                        var contributors = results[i].fullName;
+                        var item = document.createElement("li");
+                        item.textContent = contributors;
+                        projectContributorsList.appendChild(item);
+                    }
+                    $(people).append(h2);
+                    $(people).append(projectContributorsList);
+                }); 
+                startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv);
+            }
+        }
+    });
+}
+
+function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv){
+    var ref = firebase.database().ref("Projects/" + id);
+    ref.once("value", function(snapshot){
         var data = snapshot.val();
-        var key = snapshot.key;
-
-        //Create div for info
-        var projectDiv = document.createElement("div");
-        projectDiv.classList.add("project");
-        projectDiv.classList.add("col.s12");
-        projectDiv.id = key + "div";
-
-        //Create div for information except the Project Name
-        var projectInfoDiv = document.createElement("div");
-        projectInfoDiv.className = "extraInfoDisplay";
-        projectInfoDiv.id = key + "extraInfoDiv";
-
-        //Div for timeline Bar
-        var timelineDiv = document.createElement("div");
-        timelineDiv.classList.add("row");
-        timelineDiv.classList.add();
-        timelineDiv.id = key + "timelineBar";
-
-        //Div for dates
-        var datesDiv = document.createElement("div");
-        datesDiv.classList.add("row");
-        datesDiv.id = key + "datesDiv";
-        timelineDiv.appendChild(datesDiv);
-
+        var startDate = data.StartDate;
+        if(startDate === ""){
+            startDate = "NO DATA GIVEN";
+        }else{
+            startDate = startDate.split("-");
+            startDate = startDate[1] + "/" + startDate[2] + "/" + startDate[0];
+        }
+        var percent = data.Percent;
+        if(percent === ""){
+            percent = "NO DATA GIVEN";
+        }
         //Start Date Div
         var start = document.createElement("div");
         start.classList.add("col.s6");
-        start.id = key + "startDate";
+        start.id = id + "startDate";
         $(start).css("float", "left");
-        datesDiv.appendChild(start);
+        if(startDate === "NO DATA GIVEN"){
+            $(start).css("background-color", "darkred");
+        }
+        datesDiv.prepend(start);
 
         //Start date
         var startTxt = document.createElement("h4");
         startTxt.className = "startTxt";
-        startTxt.textContent = data.StartDate;
-        start.appendChild(startTxt);
-
-        //End Date Div
-        var end = document.createElement("div");
-        end.className = "col s6";
-        $(end).css("float", "right");
-        datesDiv.appendChild(end);
-
-        //End date
-        var endTxt = document.createElement("h4");
-        endTxt.className = "endTxt";
-        endTxt.textContent = data.EndDate;
-        $(endTxt).css("float", "right");
-        end.appendChild(endTxt);
-
-        //timeline hr
-        var hr = document.createElement("hr");
-        hr.textContent = data.Percentage + " Complete";
-        $(hr).css("font-size", "18px");
-        $(hr).css("height", "30px");
-        $(hr).css("width", data.Percentage);
-        $(hr).css("float", "left");
-        $(hr).css("background-color", "purple");
-        timelineDiv.appendChild(hr);
-
-        //Project Name Div
-        var name = document.createElement("div");
-        name.className = "name";
-
-        //Project dates div
-        var dates = document.createElement("div");
-        dates.className = "datesHome";
-
-        //Description and Contributors Div
-        var div = document.createElement("div");
-
-        //Contributors Div
-        var people = document.createElement("div");
-        people.classList.add("col.s6");
-        people.classList.add("people")
-        div.appendChild(people);
-
-        //Description Div
-        var description = document.createElement("div");
-        description.classList.add("col.s6");
-        description.classList.add("descript");
-        div.appendChild(description);
-
-        //Project Name Element 
-        var projectName = document.createElement("h3");
-        projectName.textContent = data.ProjectName;
-        name.appendChild(projectName);
-
-        //Change info Button Element
-        var button = document.createElement("button");
-        button.textContent = "Change Data";
-        button.className = "col s4 offset-s4";
-        button.classList.add("changeData");
-        button.id = key + "button";
+        startTxt.textContent = startDate;
+        $(start).append(startTxt);
 
         //Project Start Date Element
         var projectStart = document.createElement("h5");
-        projectStart.textContent = "Start Date: "  + data.StartDate;
+        projectStart.textContent = "Start Date: "  + startDate;
         projectStart.className = "col s6";
+        if(startDate === "NO DATA GIVEN"){
+            $(dates).css("background-color", "darkred");
+        }
         dates.appendChild(projectStart);
 
-        //Project End Date Element
-        var projectEnd = document.createElement("h5");
-        projectEnd.textContent = "End Date: " + data.EndDate;
-        projectEnd.className = "col s6";
-        dates.appendChild(projectEnd);
-
-        //Contributors Element (For loop to loop through array of names gotten from Firebase)
-        var h2 = document.createElement("h4");
-        h2.textContent = "Developers:";
-        $(h2).css("font-weight", "bold");
-        var projectContributorsList = document.createElement('ul');
-        var contributors = data.Contributors;
-        for(var i = 0; i < contributors.length; i++){
-            var item = document.createElement("li");
-            item.textContent = contributors[i];
-            projectContributorsList.appendChild(item);
-        }
-        people.appendChild(h2);
-        people.appendChild(projectContributorsList);
-
-        //Project Description Div
-        var h4 = document.createElement("h4");
-        h4.textContent = "Description:";
-        $(h4).css("font-weight", "bold");
-        var projectDescription = document.createElement("h5");
-        if(data.Description === ""){
-            projectDescription.textContent = "No Description"
+        //timeline hr
+        var hr = document.createElement("hr");
+        if(percent === "NO DATA GIVEN"){
+            hr.textContent = "NO DATA GIVEN";
         }else{
-            projectDescription.textContent = data.Description;
+            hr.textContent = percent + "% Complete";
+        }   
+        $(hr).css("font-size", "18px");
+        $(hr).css("height", "30px");
+        $(hr).css("width", percent + "%");
+        $(hr).css("float", "left");
+        $(hr).css("background-color", "purple");
+        if(percent === "NO DATA GIVEN"){
+            $(hr).css("background-color", "darkred");
         }
-        $(description).append(h4);
-        $(description).append(projectDescription);
-
-        //Append Elements to their respective Divs
-        $(projectDiv).append(name);
-        $(projectInfoDiv).append(dates);
-        $(projectInfoDiv).append(div);
-        $(projectInfoDiv).append(timelineDiv);
-        $(projectDiv).append(projectInfoDiv);
-        projectDiv.appendChild(button);
-        if(data.Percentage === "100%"){
+        timelineDiv.appendChild(hr);
+        if(percent === "100"){
             document.getElementById('finished').appendChild(projectDiv);
         }else{
             document.getElementById('projects').appendChild(projectDiv);
         }
     });
-    $(document.body).on('click','.changeData', changeData);
-    $(document.body).on('click', '#toggleUnfinished', toggleUnfinished);
-    $(document.body).on('click', '#toggleFinished', toggleFinished)
-}
+} 
 
 function changeData(){
     var id = $(this).attr("id");

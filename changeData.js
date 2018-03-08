@@ -9,46 +9,37 @@
         messagingSenderId: "955262371102"
     };
     var location = window.location.href;
-    var uid = location.split("%20");
+    var uid = location.split("room=%20");
     uid = uid[1];
+    console.log(uid);
 
 function init(){
     firebase.initializeApp(config);
     //Get firebase ref to show data to be changed
-    var ref = firebase.database().ref('Projects/' + uid);
-    ref.once('value', function(snapshot){
-        var data = snapshot.val();  
-        
-        //Project Name Element
-        var name = document.createElement("h4");
-        name.textContent = "Project Name: " + data.ProjectName;
-        $('.nameDiv').prepend(name);
+    // var ref = firebase.database().ref('Projects/' + uid);
+    // ref.once('value', function(snapshot){
+    //     var data = snapshot.val();  
+    //     var startDate = data.startDate;
+    //     var percent = data.Percent;
 
-        //Project Start Date Element
-        var startDate = document.createElement("h4");
-        startDate.textContent = "Start Date: " + data.StartDate; 
-        $('.startDateDiv').prepend(startDate);
+    //     if(startDate === ""){
+    //         startDate = "NO START DATE";
+    //     }
 
-        //Project End Date Element
-        var endDate = document.createElement("h4");
-        endDate.textContent = "End Date: " + data.EndDate;
-        $('.endDateDiv').prepend(endDate);
+    //     if(percent === ""){
+    //         percent = "NO PERCENTAGE";
+    //     }
 
-        //Project Contributors Element
-        var contributors = document.createElement("h4");
-        contributors.textContent = "Contributors:  " + data.Contributors;
-        $('.contributorsDiv').prepend(contributors);
+    //     //Project Start Date Element
+    //     var startDate = document.createElement("h4");
+    //     startDate.textContent = "Start Date: " + startDate; 
+    //     $('.startDateDiv').prepend(startDate);
 
-        //Project Percentage Element
-        var percentage = document.createElement("h4");
-        percentage.textContent = "Percentage: " + data.Percentage;
-        $('.percentageDiv').prepend(percentage);
-
-        //Project Description Element 
-        var description = document.createElement("h4");
-        description.textContent = "Description: " + data.Description;
-        $('.descriptionDiv').prepend(description);
-    });
+    //     //Project Percentage Element
+    //     var percentage = document.createElement("h4");
+    //     percentage.textContent = "Percentage: " + percent;
+    //     $('.percentageDiv').prepend(percentage);
+    // });
     $(document.body).on('click', '.change', changeData);
 }
 
@@ -57,63 +48,37 @@ function changeData(){
     var ref = firebase.database().ref('Projects/' + uid);
 
     //Get new Data
-    var name = $('#name').val();
     var startDate = $('#startDate').val();
-    console.log(startDate);
-    var endDate = $('#endDate').val();
-    var contributors = $('#contributors').val();
-    if(contributors === ""){
-        contributors = [];
-    }else{
-        contributors = contributors.split(",");
+    if(startDate === ""){
+        startDate = "";
     }
     var percentage = $('#percent').val();
-    var description = $('#description').val();
+    if(percentage === ""){
+        percentage = "";
+    }
 
     //Create Object with new item upload
     var items = {
-        ProjectName:name,
         StartDate:startDate,
-        EndDate:endDate,
-        Contributors:contributors,
-        Percentage:percentage,
-        Description:description,
+        Percent:percentage,
     }
 
     //Pull data from data from Firebase for empty input fields
     ref.once('value', function(snapshot){
         var data = snapshot.val();
+        console.log(data);
 
         //To check to see if input fields our empty
         //If empty, fill with respective key info pair with current data
-        if(name === ""){
-            name = data.ProjectName;
-            items.ProjectName = name;
-        }
 
         if(startDate === ""){
             startDate = data.StartDate;
             items.StartDate = startDate;
         }
 
-        if(endDate === ""){
-            endDate = data.EndDate;
-            items.EndDate = endDate;
-        }
-
-        if(contributors.length === 0){
-            contributors = data.Contributors;
-            items.Contributors = contributors;
-        }
-
         if(percentage === ""){
             percentage = data.Percentage;
-            items.Percentage = percentage;
-        }
-
-        if(description === ""){
-            description = data.Description;
-            items.Description = description;
+            items.Percent = percentage;
         }
     });
     setTimeout(function(){
@@ -123,7 +88,7 @@ function changeData(){
 
 function update(ref, items){
      //Update Data
-    firebase.database().ref('Projects/' + uid).update(items);
+    firebase.database().ref('Projects/' + uid).set(items);
     // location.replace("index.html");
     alert("Your data has been changed");
 }
