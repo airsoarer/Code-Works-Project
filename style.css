@@ -1,11 +1,24 @@
 body{
+    width: 100% !important;
+    background-color: #222629;
+    color:#edf5e1 !important;
+    font-size: 24px;
     padding: 0px;
     margin: 0px;
-    font-size: 24px;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+}
+
+button{
+    background-color: #61892f !important;
+    border-radius: 5px;
+    color: #edf5e1 !important;
+    border: none;
+    padding: 5px;
 }
 
 .project{
-    margin-bottom: 140px;
+    margin-top: 150px;
 }
 
 .project:first-of-type{
@@ -17,7 +30,7 @@ body{
 }
 
 .extraInfoDisplay{
-    display: inline-block;
+    /* display: inline-table; */
 }
 
 .datesHome{
@@ -27,15 +40,31 @@ body{
 }
 
 ul{
-    display:inline-flex;
+    display:inline-block;
 }
 
 li{
-    margin: 5px;
+    margin: 30px;
     font-size: 24px;  
+}
+
+li:first-of-type{
+    margin-top: 2px;
+}
+
+li:last-of-type{
+    margin-bottom: 20px;
 }
 
 hr{
     border: none;
     border-radius: 5px;
 }
+
+.people{
+    padding: 0px;
+    margin: 0px;
+    line-height: 0.5px !important;
+    font-size: 15px !important;
+}
+

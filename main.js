@@ -32,33 +32,33 @@ function init(){
             //Create div for project
             var projectDiv = document.createElement("div");
             projectDiv.classList.add("project");
-            projectDiv.classList.add("col.s12");
+            projectDiv.classList.add("row");
             projectDiv.id = id + "div";
 
             //Create div for information except the Project Name
             var projectInfoDiv = document.createElement("div");
-            projectInfoDiv.className = "extraInfoDisplay";
+            projectInfoDiv.classList.add("col.s12");
+            projectInfoDiv.classList.add("extraInfoDisplay");
             projectInfoDiv.id = id + "extraInfoDiv";
 
             //Div for timeline Bar
             var timelineDiv = document.createElement("div");
             timelineDiv.classList.add("row");
-            timelineDiv.classList.add();
             timelineDiv.id = id + "timelineBar";
 
-            //Div for dates
+            //Div for dates (above progress bar)
             var datesDiv = document.createElement("div");
             datesDiv.classList.add("row");
             datesDiv.id = id + "datesDiv";
             timelineDiv.appendChild(datesDiv);
 
-            //End Date Div
+            //End Date Div (above progress bar)
             var end = document.createElement("div");
             end.className = "col s6";
             $(end).css("float", "right");
             datesDiv.appendChild(end);
 
-            //End date
+            //End date (above progress bar)
             var endTxt = document.createElement("h4");
             endTxt.className = "endTxt";
             endTxt.textContent = due;
@@ -69,9 +69,30 @@ function init(){
             var name = document.createElement("div");
             name.className = "name";
 
-            //Project dates div
+            //Project dates div (In general information)
             var dates = document.createElement("div");
-            dates.className = "datesHome";
+            dates.classList.add("row");
+            dates.classList.add("datesHome");
+
+            //Project start date div (In general information)
+            var generalStart = document.createElement("div");
+            generalStart.classList.add("col.s6");
+            var startH4 = document.createElement("h4");
+            startH4.textContent = "Start Date: ";
+            $(startH4).css("color", "#474b4f");
+            $(startH4).css("font-weight", "bold");
+            generalStart.appendChild(startH4);
+            dates.appendChild(generalStart);
+            
+            //Project end date div (In general information)
+            var generalEnd = document.createElement("div");
+            generalEnd.classList.add("col.s6");
+            var endH4 = document.createElement("h4");
+            endH4.textContent = "End Date: ";
+            $(endH4).css("color", "#474b4f");
+            $(endH4).css("font-weight", "bold");
+            generalEnd.appendChild(endH4);
+            dates.appendChild(generalEnd);
 
             //Description and Contributors Div
             var div = document.createElement("div");
@@ -91,6 +112,8 @@ function init(){
             //Project Name Element 
             var projectName = document.createElement("h3");
             projectName.textContent = apiName;
+            $(projectName).css("color", "#86c232");
+            $(projectName).css("font-weight", "bold");
             name.appendChild(projectName);
 
             //Change info Button Element
@@ -102,13 +125,14 @@ function init(){
 
             //Project End Date Element
             var projectEnd = document.createElement("h5");
-            projectEnd.textContent = "End Date: " + due;
+            projectEnd.textContent = due;
             projectEnd.className = "col s6";
-            dates.appendChild(projectEnd);
+            generalEnd.appendChild(projectEnd);
 
             //Project Description Div
             var h4 = document.createElement("h4");
             h4.textContent = "Description:";
+            $(h4).css("color", "#474b4f")
             $(h4).css("font-weight", "bold");
             var projectDescription = document.createElement("h5");
             if(desc === ""){
@@ -136,6 +160,7 @@ function init(){
                     //Contributors Element 
                     var h2 = document.createElement("h4");
                     h2.textContent = "Developers:";
+                    $(h2).css("color", "#474b4f")
                     $(h2).css("font-weight", "bold");
                     var projectContributorsList = document.createElement('ul');
                     for(var i = 0; i < results.length; i++){
@@ -147,13 +172,13 @@ function init(){
                     $(people).append(h2);
                     $(people).append(projectContributorsList);
                 }); 
-                startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv);
+                startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart);
             }
         }
     });
 }
 
-function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv){
+function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart){
     var ref = firebase.database().ref("Projects/" + id);
     ref.once("value", function(snapshot){
         var data = snapshot.val();
@@ -174,7 +199,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv){
         start.id = id + "startDate";
         $(start).css("float", "left");
         if(startDate === "NO DATA GIVEN"){
-            $(start).css("background-color", "darkred");
+            $(start).css("background-color", "#86c232");
         }
         datesDiv.prepend(start);
 
@@ -186,12 +211,12 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv){
 
         //Project Start Date Element
         var projectStart = document.createElement("h5");
-        projectStart.textContent = "Start Date: "  + startDate;
+        projectStart.textContent = startDate;
         projectStart.className = "col s6";
         if(startDate === "NO DATA GIVEN"){
-            $(dates).css("background-color", "darkred");
+            $(dates).css("background-color", "#86c232");
         }
-        dates.appendChild(projectStart);
+        generalStart.appendChild(projectStart);
 
         //timeline hr
         var hr = document.createElement("hr");
@@ -204,9 +229,9 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv){
         $(hr).css("height", "30px");
         $(hr).css("width", percent + "%");
         $(hr).css("float", "left");
-        $(hr).css("background-color", "purple");
+        $(hr).css("background-color", "#474b4f");
         if(percent === "NO DATA GIVEN"){
-            $(hr).css("background-color", "darkred");
+            $(hr).css("background-color", "#86c232");
         }
         timelineDiv.appendChild(hr);
         if(percent === "100"){
