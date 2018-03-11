@@ -20,42 +20,30 @@ function init(){
 function changeData(){
     //Get Firebase Ref
     var ref = firebase.database().ref('Projects/' + uid);
-
-    //Get new Data
-    var startDate = $('#startDate').val();
-    if(startDate === ""){
-        startDate = "";
-    }
-
-    var percentage = $('#percent').val();
-    if(percentage === ""){
-        percentage = "";
-    }
-
-    //Create Object with new item upload
-    var items = {
-        StartDate:startDate,
-        Percent:percentage,
-    }
-
-    //Pull data from data from Firebase for empty input fields
     ref.once('value', function(snapshot){
         var data = snapshot.val();
-
-        //To check to see if input fields our empty
-        //If empty, fill with respective key info pair with current data
-
+        console.log(data);
+        //Get new Data
+        var startDate = $('#startDate').val();
         if(startDate === ""){
-            items.StartDate = data.StartDate;
+            startDate = data.StartDate;
         }
 
+        var percentage = $('#percent').val();
         if(percentage === ""){
-            items.Percent = data.Percent;
+            percentage = data.Percent;
         }
+
+        //Create Object with new item upload
+        var items = {
+            StartDate:startDate,
+            Percent:percentage,
+        }        
+
+        setTimeout(function(){
+            update(ref, items);
+        }, 500);
     });
-    setTimeout(function(){
-        update(ref, items);
-    }, 500);
 }
 
 function update(ref, items){
