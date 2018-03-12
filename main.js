@@ -10,11 +10,14 @@
     };
     var finishedClickCount = 1;
     var unfinishedClickCount = 1;
+    var rotateNum = 0;
+    var items = 0;
 
 function init(){
     firebase.initializeApp(config);
     $.getJSON("https://api.trello.com/1/boards/6PVLjz20/?key=ad18609bec500062f9944b092d1601de&token=8a16dca9b23c590fdd6819d5b3123a3656eec64fba10bafd5f84f9cc44369b48&cards=all", function(results){
         for(var i = 0; i < results.cards.length; i++){
+            items++;
             var id = results.cards[i].id;
             var due = results.cards[i].due;
             if(due === null){
@@ -33,6 +36,7 @@ function init(){
             var projectDiv = document.createElement("div");
             projectDiv.classList.add("project");
             projectDiv.classList.add("row");
+            projectDiv.classList.add("rotate" + i);
             projectDiv.id = id + "div";
 
             //Create div for information except the Project Name
@@ -266,4 +270,15 @@ function toggleUnfinished(){
         $('#projects').show();
     }
 }
+
+setInterval(function(){
+    if(rotateNum >= items){
+        console.log(rotateNum);
+        rotateNum = 0;
+    }
+    $(".rotate" + rotateNum)[0].scrollIntoView({
+        behavior: 'smooth'
+    });
+    rotateNum++;
+}, 5000);
 })();
