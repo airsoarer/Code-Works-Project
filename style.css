@@ -29,10 +29,6 @@ button{
     margin-bottom: 50px;
 }
 
-.extraInfoDisplay{
-    /* display: inline-table; */
-}
-
 .datesHome{
     padding: 0px;
     margin: 0px;
@@ -56,11 +52,6 @@ li:last-of-type{
     margin-bottom: 20px;
 }
 
-hr{
-    border: none;
-    border-radius: 5px;
-}
-
 .people{
     padding: 0px;
     margin: 0px;
@@ -68,3 +59,48 @@ hr{
     font-size: 15px !important;
 }
 
+.txt{
+    animation-name: fade;
+    animation-duration: 3s;
+}
+
+.data{
+    animation-name: data;
+    animation-duration: 3s;
+}
+
+.percentBtn{
+    background-color: #474b4f !important;
+}
+
+.rangeDiv{
+    display:none;
+    height: 30px;
+    margin-top: 5px;
+    /* margin-bottom: 25px */
+}
+
+.changeStartDiv{
+    display: none;
+    margin-top: 5px;
+}
+
+@keyframes fade{
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes data {
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
