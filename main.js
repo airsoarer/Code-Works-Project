@@ -207,7 +207,6 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
             startDate = data.StartDate.split("-");
             startDate = startDate[1] + "/" + startDate[2] + "/" + startDate[0];
             percent = data.Percent;
-            console.log(percent);
         }
         //Start Date Div
         var start = document.createElement("div");
@@ -383,14 +382,15 @@ function toggleUnfinished(){
         $('#projects').show();
     }
 }
-
-setInterval(function(){
-    if(rotateNum >= items){
-        rotateNum = 0;
-    }
-    $(".rotate" + rotateNum)[0].scrollIntoView({
-        behavior: 'smooth'
-    });
-    rotateNum++;
-}, 10000);
+try {
+    setInterval(function(){
+        if(rotateNum >= items){
+            rotateNum = 0;
+        }
+        $(".rotate" + rotateNum)[0].scrollIntoView({
+            behavior: 'smooth'
+        });
+        rotateNum++;
+    }, 10000);
+} finally{}
 })();
