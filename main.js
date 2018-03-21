@@ -393,6 +393,8 @@ try {
         rotateNum++;
     }, 10000);
 } catch(TypeError){
+    alert("This web Browser does not support auto scrolling to each project.");
+}finally{
     init();
 }
 })();
