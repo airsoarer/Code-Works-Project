@@ -392,5 +392,7 @@ try {
         });
         rotateNum++;
     }, 10000);
-} finally{}
+} finally{
+    init();
+}
 })();
