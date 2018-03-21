@@ -392,7 +392,7 @@ try {
         });
         rotateNum++;
     }, 10000);
-} finally{
+} catch(TypeError){
     init();
 }
 })();
