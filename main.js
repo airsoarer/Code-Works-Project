@@ -121,7 +121,7 @@ function init(){
             var projectName = document.createElement("h3");
             projectName.textContent = apiName;
             projectName.classList.add("txt");
-            $(projectName).css("color", "#86c232");
+            $(projectName).css("color", "#FFFFFF");
             $(projectName).css("font-weight", "bold");
             name.appendChild(projectName);
 

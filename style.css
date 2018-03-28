@@ -1,7 +1,7 @@
 body{
     width: 100% !important;
-    background-color: #222629;
-    color:#edf5e1 !important;
+    background-color: #F7931E;
+    color: white !important;
     font-size: 24px;
     padding: 0px;
     margin: 0px;
@@ -10,9 +10,9 @@ body{
 }
 
 button{
-    background-color: #61892f !important;
+    background-color: #A20BAA !important;
     border-radius: 5px;
-    color: #edf5e1 !important;
+    color: white !important;
     border: none;
     padding: 5px;
 }
@@ -70,7 +70,7 @@ li:last-of-type{
 }
 
 .percentBtn{
-    background-color: #474b4f !important;
+    background-color: #A20BAA !important;
 }
 
 .rangeDiv{
