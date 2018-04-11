@@ -184,13 +184,13 @@ function init(){
                     $(people).append(h2);
                     $(people).append(projectContributorsList);
                 }); 
-                startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart, due);
+                startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart, due, i, apiName);
             }
         }
     });
 }
 
-function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart, due){
+function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart, due, i, apiName){
     var ref = firebase.database().ref("Projects/" + id);
     ref.once("value", function(snapshot){
         var data = snapshot.val();
@@ -251,10 +251,42 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 
         // Timeline Div
         var timelineDivTwo = document.createElement("div");
+        $(timelineDivTwo).css("height", "600px");
+        $(timelineDivTwo).css("width", "100%");
+        timelineDivTwo.classList.add("col.s12");
         timelineDivTwo.id = id + "timeline";
 
-        // Create Timeline
+        // Create Timeline / Variables needed for timeline
+        
+        // Need to change the date to year month day because it is in the wrong format right now
+        startDate = startDate.split("/");
+        startDate = startDate[0] + "-" + startDate[1] + "-" + startDate[2];
 
+        due = due.split("/");
+        due = due[0] + "-" + due[1] + "-" + due[2];
+
+        var items = new vis.DataSet([
+            {id: i, content: apiName, start: startDate, end: due}
+          ]);
+
+          console.log(apiName, startDate, due);
+
+        var options = {
+            height: 600 // px
+          };
+
+          var timeline = new vis.Timeline(timelineDivTwo, items, options);
+          
+          var axisOrientation = document.getElementById('axis-orientation');
+          axisOrientation.onchange = function () {
+            timeline.setOptions({ orientation: {axis: this.value} });
+          };
+        
+          var itemOrientation = document.getElementById('item-orientation');
+            
+            itemOrientation.onchange = function () {
+              timeline.setOptions({ orientation: {item: this.value} });
+            };
 
         // Append timelineDivTwo
         timelineDiv.appendChild(timelineDiv);
