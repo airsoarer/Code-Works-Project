@@ -184,13 +184,13 @@ function init(){
                     $(people).append(h2);
                     $(people).append(projectContributorsList);
                 }); 
-                startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart);
+                startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart, due);
             }
         }
     });
 }
 
-function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart){
+function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart, due){
     var ref = firebase.database().ref("Projects/" + id);
     ref.once("value", function(snapshot){
         var data = snapshot.val();
@@ -249,6 +249,16 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         generalStart.appendChild(projectStart);
         generalStart.appendChild(changeStart);
 
+        // Timeline Div
+        var timelineDivTwo = document.createElement("div");
+        timelineDivTwo.id = id + "timeline";
+
+        // Create Timeline
+
+
+        // Append timelineDivTwo
+        timelineDiv.appendChild(timelineDiv);
+
         //timeline button
         var hr = document.createElement("button");
         hr.id = id + "button";
@@ -287,6 +297,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         $(range).attr("max", "100");
         rangeDiv.appendChild(range);
 
+
         timelineDiv.appendChild(hr);
         timelineDiv.appendChild(rangeDiv);
         if(percent === "100"){
@@ -297,12 +308,12 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
     });
 } 
 
-function changeData(){
-    var id = $(this).attr("id");
-    id = id.split("button");
-    id = id[0];
-    location.replace("changeData.html?room= " + id);
-}
+// function changeData(){
+//     var id = $(this).attr("id");
+//     id = id.split("button");
+//     id = id[0];
+//     location.replace("changeData.html?room= " + id);
+// }
 
 function changePercent(){
     var id = $(this).attr("id");
