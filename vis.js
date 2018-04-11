@@ -24,10 +24,10 @@
  */
 
 "use strict";
-function alertThis(msg, msg2)
-{
-  alert(msg + ' ZZZ ' + msg2);
-}
+// function alertThis(msg, msg2)
+// {
+//   alert(msg + ' ZZZ ' + msg2);
+// }
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -11422,12 +11422,12 @@ TimeStep.prototype.getLabelMinor = function(date) {
  * @returns {String}
  */
 TimeStep.prototype.getLabelMajor = function(date) {
-  if (this.scale == "hour" && date > 12)
-  {
-    var j = date;
-    date -= 12000;
-    alertThis(date, j);
-  }
+  // if (this.scale == "hour" && date > 12)
+  // {
+  //   var j = date;
+  //   date -= 12000;
+  //   alertThis(date, j);
+  // }
 
   if (date == undefined) {
     date = this.current;
