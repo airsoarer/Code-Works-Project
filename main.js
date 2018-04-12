@@ -258,12 +258,12 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 
         // Create Timeline / Variables needed for timeline
         
-        // Need to change the date to year month day because it is in the wrong format right now
+        // format is now correct
         startDate = startDate.split("/");
-        startDate = startDate[0] + "-" + startDate[1] + "-" + startDate[2];
+        startDate = startDate[2] + "-" + startDate[1] + "-" + startDate[0];
 
         due = due.split("/");
-        due = due[0] + "-" + due[1] + "-" + due[2];
+        due = due[2] + "-" + due[1] + "-" + due[0];
 
         var items = new vis.DataSet([
             {id: i, content: apiName, start: startDate, end: due}
