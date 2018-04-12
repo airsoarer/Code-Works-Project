@@ -264,9 +264,12 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 
         due = due.split("/");
         due = due[2] + "-" + due[1] + "-" + due[0];
-
+        
+        //Id of the item on the timeline may not be able to be 0 so im changing it to i + 1
+        //by making the variable below
+        var iPlusOne = i + 1;
         var items = new vis.DataSet([
-            {id: i, content: apiName, start: startDate, end: due}
+            {id: iPlusOne, content: apiName, start: startDate, end: due}
           ]);
 
           console.log(apiName, startDate, due);
