@@ -317,6 +317,9 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 //         due = due[2] + "-" + due[1] + "-" + due[0];
         due = new Date(due[2], due[1], due[0]);
         
+        // Make apiName a new String object
+        apiName = new String(apiName);
+        
         //Id of the item on the timeline may not be able to be 0 so im changing it to i + 1
         //by making the variable below
         var iPlusOne = i + 1;
