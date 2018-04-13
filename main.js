@@ -324,7 +324,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         //by making the variable below
         var iPlusOne = i + 1;
         var items = new vis.DataSet([
-            {id: iPlusOne, text: apiName, start: startDate, end: due}
+            {id: iPlusOne, content: apiName, start: startDate, end: due}
           ]);
 
           console.log(apiName, startDate, due);
