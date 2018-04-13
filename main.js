@@ -327,10 +327,8 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
             {id: iPlusOne, content: apiName, start: startDate, end: due}
           ]);
 
-          console.log(apiName, startDate, due);
-
         var options = {
-            height: 600 // px
+            height: 400 // px
           };
 
           var timeline = new vis.Timeline(timelineDivTwo, items, options);
