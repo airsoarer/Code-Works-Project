@@ -256,41 +256,6 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         timelineDivTwo.classList.add("col.s12");
         timelineDivTwo.id = id + "timeline";
 
-        // Create Timeline / Variables needed for timeline
-        
-        // format is now correct
-        startDate = startDate.split("/");
-        startDate = startDate[2] + "-" + startDate[1] + "-" + startDate[0];
-
-        due = due.split("/");
-        due = due[2] + "-" + due[1] + "-" + due[0];
-        
-        //Id of the item on the timeline may not be able to be 0 so im changing it to i + 1
-        //by making the variable below
-        var iPlusOne = i + 1;
-        var items = new vis.DataSet([
-            {id: iPlusOne, content: apiName, start: startDate, end: due}
-          ]);
-
-          console.log(apiName, startDate, due);
-
-        var options = {
-            height: 600 // px
-          };
-
-          var timeline = new vis.Timeline(timelineDivTwo, items, options);
-          
-          var axisOrientation = document.getElementById('axis-orientation');
-          axisOrientation.onchange = function () {
-            timeline.setOptions({ orientation: {axis: this.value} });
-          };
-        
-          var itemOrientation = document.getElementById('item-orientation');
-            
-            itemOrientation.onchange = function () {
-              timeline.setOptions({ orientation: {item: this.value} });
-            };
-
         // Append timelineDivTwo
         timelineDiv.appendChild(timelineDiv);
 
@@ -340,6 +305,42 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         }else{
             document.getElementById('projects').appendChild(projectDiv);
         }
+        
+        // Create Timeline / Variables needed for timeline
+        
+        // format is now correct
+        startDate = startDate.split("/");
+        startDate = startDate[2] + "-" + startDate[1] + "-" + startDate[0];
+
+        due = due.split("/");
+        due = due[2] + "-" + due[1] + "-" + due[0];
+        
+        //Id of the item on the timeline may not be able to be 0 so im changing it to i + 1
+        //by making the variable below
+        var iPlusOne = i + 1;
+        var items = new vis.DataSet([
+            {id: iPlusOne, content: apiName, start: startDate, end: due}
+          ]);
+
+          console.log(apiName, startDate, due);
+
+        var options = {
+            height: 600 // px
+          };
+
+          var timeline = new vis.Timeline(timelineDivTwo, items, options);
+          
+          var axisOrientation = document.getElementById('axis-orientation');
+          axisOrientation.onchange = function () {
+            timeline.setOptions({ orientation: {axis: this.value} });
+          };
+        
+          var itemOrientation = document.getElementById('item-orientation');
+            
+            itemOrientation.onchange = function () {
+              timeline.setOptions({ orientation: {item: this.value} });
+            };
+
     });
 } 
 
