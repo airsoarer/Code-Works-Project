@@ -310,10 +310,12 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         
         // format is now correct
         startDate = startDate.split("/");
-        startDate = startDate[2] + "-" + startDate[1] + "-" + startDate[0];
+//         startDate = startDate[2] + "-" + startDate[1] + "-" + startDate[0];
+        startDate = new Date(startDate[2], startDate[1], startDate[0]);
 
         due = due.split("/");
-        due = due[2] + "-" + due[1] + "-" + due[0];
+//         due = due[2] + "-" + due[1] + "-" + due[0];
+        due = new Date(due[2], due[1], due[0]);
         
         //Id of the item on the timeline may not be able to be 0 so im changing it to i + 1
         //by making the variable below
