@@ -257,7 +257,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 
 
         // Append timelineDivTwo
-        timelineDiv.appendChild(timelineDiv);
+        timelineDiv.appendChild(timelineDivTwo);
 
         //timeline button
         var hr = document.createElement("button");
