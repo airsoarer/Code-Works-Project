@@ -252,6 +252,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         // Timeline Div
         var timelineDivTwo = document.createElement("div");
         timelineDivTwo.id = id + "timeline";
+        // $(timelineDivTwo).css("height", "400px");
 
         // Create Timeline
 
@@ -306,46 +307,50 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
             document.getElementById('projects').appendChild(projectDiv);
         }
         
-        var iPlus = i + 1;
+        var y = i + 1;
+        y = new String(y);
 
-        startDate = startDate.split("/");
-        startDate = new Date(startDate[2], startDate[1], startDate[0]);
+        // Create seperate timelines
+        google.charts.load("current", {packages:["timeline"]});
+        google.charts.setOnLoadCallback(drawChart);
 
-        due = due.split("/");
-        due = new Date(due[2], due[1], due[0]);
+        // Function callback form google.charts.setOnLoadCallback
+        function drawChart(){
+            var container = document.getElementById("master");
+            // Create a new Timeline object
+            var master = new google.visualization.Timeline(container);
+            var chart = new google.visualization.Timeline(timelineDivTwo);
+            // Create a new DataTable object
+            var dataTable = new google.visualization.DataTable();
 
-        // Create a DataSet (allows two way data-binding)
-         var items = new vis.DataSet([
-            {id: iPlus, content: apiName, start: startDate, end: due},
-        ]);
+            // Create Data Columns 
+            dataTable.addColumn({type: 'string', id: 'Number'});
+            dataTable.addColumn({type: 'string', id: 'Title'});
+            dataTable.addColumn({type: 'date', id: 'Start'});
+            dataTable.addColumn({type: 'date', id: 'End'});
 
-        // Configuration for the Timeline
-        var options = {
-            height: 400 // px
-        };
+            // Reorder Date
+            startDate = startDate.split("/");
+            due = due.split("/");
 
-        // Create a Timeline
-        var timeline = new vis.Timeline(timelineDivTwo, items, options);
+            // Give data to columns
+            dataTable.addRows([
+                [ y, apiName, new Date(startDate[2], startDate[0], startDate[1]), new Date(due[2], due[0], due[1])],
+            ])
 
-        var axisOrientation = document.getElementById('axis-orientation');
-        axisOrientation.onchange = function () {
-            timeline.setOptions({ orientation: {axis: this.value} });
-        };
+            // Set option to get rid of row labels
+            var options = {
+                timeline: {showRowLabels: false, barLabelStyle: { fontSize: 18 }},
+                height: 200,
+            };  
 
-        var itemOrientation = document.getElementById('item-orientation');
-            
-            itemOrientation.onchange = function () {
-            timeline.setOptions({ orientation: {item: this.value} });
-            };
-        });
+            // Draw Tables
+            chart.draw(dataTable, options);
+            master.draw(dataTable, options);
+
+        }
+    });
 } 
-
-// function changeData(){
-//     var id = $(this).attr("id");
-//     id = id.split("button");
-//     id = id[0];
-//     location.replace("changeData.html?room= " + id);
-// }
 
 function changePercent(){
     var id = $(this).attr("id");
@@ -434,7 +439,7 @@ try {
             behavior: 'smooth'
         });
         rotateNum++;
-    }, 10000);
+    }, 15000);
 } catch(TypeError){
     alert("This web Browser does not support auto scrolling to each project.");
 }finally{
