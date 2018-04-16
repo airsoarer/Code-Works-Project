@@ -14,6 +14,9 @@
     var rotateNum = 0;
     var items = 0;
 
+    // Array to hold arrays
+    var arrs = [];
+
 function init(){
     firebase.initializeApp(config);
     $.getJSON("https://api.trello.com/1/boards/6PVLjz20/?key=ad18609bec500062f9944b092d1601de&token=8a16dca9b23c590fdd6819d5b3123a3656eec64fba10bafd5f84f9cc44369b48&cards=all", function(results){
@@ -188,6 +191,7 @@ function init(){
             }
         }
     });
+    masterTimeline();
 }
 
 function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart, due, i, apiName){
@@ -316,9 +320,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 
         // Function callback form google.charts.setOnLoadCallback
         function drawChart(){
-            var container = document.getElementById("master");
             // Create a new Timeline object
-            var master = new google.visualization.Timeline(container);
             var chart = new google.visualization.Timeline(timelineDivTwo);
             // Create a new DataTable object
             var dataTable = new google.visualization.DataTable();
@@ -344,13 +346,50 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
                 height: 200,
             };  
 
-            // Draw Tables
+            // Draw Table
             chart.draw(dataTable, options);
-            master.draw(dataTable, options);
 
+            var arr =  [y, apiName, new Date(startDate[2], startDate[0], startDate[1]), new Date(due[2], due[0], due[1])];
+            arrs.push(arr);
+
+            // console.log(arrs[i][0]);
         }
     });
 } 
+
+function masterTimeline(){
+    // Create seperate timelines
+    google.charts.load("current", {packages:["timeline"]});
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Function callback form google.charts.setOnLoadCallback
+    function drawChart(){
+        // Get container in HTML
+        var container = document.getElementById("master");
+        // Create a new Timeline object
+        var chart = new google.visualization.Timeline(container);
+        // Create a new DataTable object
+        var dataTable = new google.visualization.DataTable();
+
+        // Create Data Columns 
+        dataTable.addColumn({type: 'string', id: 'Number'});
+        dataTable.addColumn({type: 'string', id: 'Title'});
+        dataTable.addColumn({type: 'date', id: 'Start'});
+        dataTable.addColumn({type: 'date', id: 'End'});
+
+        // Give data to columns
+        dataTable.addRows(arrs);
+
+        // Set option to get rid of row labels
+        var options = {
+            title: "Master Timeline",
+            timeline: {showRowLabels: false, barLabelStyle: { fontSize: 18 }},
+        };  
+
+        // Draw Table
+        chart.draw(dataTable, options);
+    }
+}
 
 function changePercent(){
     var id = $(this).attr("id");
