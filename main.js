@@ -327,36 +327,36 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 
         // Function callback form google.charts.setOnLoadCallback
         function drawChart(){
-            // Create a new Timeline object
-            var chart = new google.visualization.Timeline(timelineDivTwo);
-            // Create a new DataTable object
-            var dataTable = new google.visualization.DataTable();
+            // // Create a new Timeline object
+            // var chart = new google.visualization.Timeline(timelineDivTwo);
+            // // Create a new DataTable object
+            // var dataTable = new google.visualization.DataTable();
 
-            // Create Data Columns 
-            dataTable.addColumn({type: 'string', id: 'Number'});
-            dataTable.addColumn({type: 'string', id: 'Title'});
-            dataTable.addColumn({type: 'date', id: 'Start'});
-            dataTable.addColumn({type: 'date', id: 'End'});
+            // // Create Data Columns 
+            // dataTable.addColumn({type: 'string', id: 'Number'});
+            // dataTable.addColumn({type: 'string', id: 'Title'});
+            // dataTable.addColumn({type: 'date', id: 'Start'});
+            // dataTable.addColumn({type: 'date', id: 'End'});
 
-            // Reorder Date
-            startDate = startDate.split("/");
-            due = due.split("/");
+            // // Reorder Date
+            // startDate = startDate.split("/");
+            // due = due.split("/");
 
-            // Give data to columns
-            dataTable.addRows([
-                [ y, apiName, new Date(startDate[2], startDate[0], startDate[1]), new Date(due[2], due[0], due[1])],
-            ])
+            // // Give data to columns
+            // dataTable.addRows([
+            //     [ y, apiName, new Date(startDate[2], startDate[0], startDate[1]), new Date(due[2], due[0], due[1])],
+            // ])
 
-            // Set option to get rid of row labels
-            var options = {
-                timeline: {showRowLabels: false, barLabelStyle: { fontSize: 18 }},
-                height: 150,
-            };  
+            // // Set option to get rid of row labels
+            // var options = {
+            //     timeline: {showRowLabels: false, barLabelStyle: { fontSize: 18 }},
+            //     height: 150,
+            // };  
 
-            // Draw Table
-            chart.draw(dataTable, options);
-            console.log("This is my data table");   
-            console.log(dataTable);
+            // // Draw Table
+            // chart.draw(dataTable, options);
+            // console.log("This is my data table");   
+            // console.log(dataTable);
 
             var arr =  [y, apiName, new Date(startDate[2], startDate[0], startDate[1]), new Date(due[2], due[0], due[1])];
             arrs.push(arr);
