@@ -15,7 +15,12 @@
     var items = 0;
 
     // Array to hold arrays
-    var arrs = [];
+    var arrs = [
+        // ["1", "Figure out how to use Trello", new Date(2018, 03, 28), new Date(2018, 04, 09)],
+        // ["1", "Figure out how to use Trello", new Date(2018, 03, 02), new Date(2018, 04, 02)],
+        // ["1", "Figure out how to use Trello", new Date(2018, 03, 15), new Date(2018, 04, 11)],
+        // ["1", "Figure out how to use Trello", new Date(2018, 03, 24), new Date(2018, 04, 20)],
+    ];
 
 function init(){
     firebase.initializeApp(config);
@@ -312,7 +317,9 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         }
         
         var y = i + 1;
-        y = new String(y);
+        // y = new String(y);
+        y = '' + y;
+        console.log(y);
 
         // Create seperate timelines
         google.charts.load("current", {packages:["timeline"]});
@@ -343,11 +350,13 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
             // Set option to get rid of row labels
             var options = {
                 timeline: {showRowLabels: false, barLabelStyle: { fontSize: 18 }},
-                height: 200,
+                height: 150,
             };  
 
             // Draw Table
             chart.draw(dataTable, options);
+            console.log("This is my data table");   
+            console.log(dataTable);
 
             var arr =  [y, apiName, new Date(startDate[2], startDate[0], startDate[1]), new Date(due[2], due[0], due[1])];
             arrs.push(arr);
@@ -358,6 +367,9 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 } 
 
 function masterTimeline(){
+    console.log(arrs);
+    console.log(arrs[0]);
+
     // Create seperate timelines
     google.charts.load("current", {packages:["timeline"]});
     google.charts.setOnLoadCallback(drawChart);
