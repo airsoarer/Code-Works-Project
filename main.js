@@ -99,7 +99,7 @@ function init(){
             $(startH4).css("font-weight", "bold");
             generalStart.appendChild(startH4);
             dates.appendChild(generalStart);
-            
+
             //Project end date div (In general information)
             var generalEnd = document.createElement("div");
             generalEnd.classList.add("col.s6");
@@ -126,7 +126,7 @@ function init(){
             description.classList.add("descript");
             div.appendChild(description);
 
-            //Project Name Element 
+            //Project Name Element
             var projectName = document.createElement("h3");
             projectName.textContent = apiName;
             projectName.classList.add("txt");
@@ -177,7 +177,7 @@ function init(){
             function developers(people, results){
                 var cardID = results.cards[i].shortLink;
                 $.getJSON("https://api.trello.com/1/cards/" + cardID + "/members?key=ad18609bec500062f9944b092d1601de&token=8a16dca9b23c590fdd6819d5b3123a3656eec64fba10bafd5f84f9cc44369b48&cards=all", function(results){
-                    //Contributors Element 
+                    //Contributors Element
                     var h2 = document.createElement("h4");
                     h2.textContent = "Developers:";
                     h2.classList.add("txt");
@@ -192,7 +192,7 @@ function init(){
                     }
                     $(people).append(h2);
                     $(people).append(projectContributorsList);
-                }); 
+                });
                 startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalStart, due, i, apiName);
             }
         }
@@ -279,7 +279,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
             hr.textContent = "NO DATA GIVEN";
         }else{
             hr.textContent = percent + "% Complete";
-        }   
+        }
         $(hr).css("font-size", "18px");
         $(hr).css("height", "30px");
         $(hr).css("margin-bottom", "10px");
@@ -292,7 +292,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         if(percent === "NO DATA GIVEN"){
             $(hr).css("background-color", "#86c232");
         }
-        
+
         //Div for range bar (To change the percentage of completion)
         var rangeDiv = document.createElement("div");
         rangeDiv.id = id + "rangeDiv";
@@ -316,7 +316,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         }else{
             document.getElementById('projects').appendChild(projectDiv);
         }
-        
+
         var y = i + 1;
         // y = new String(y);
         y = '' + y;
@@ -333,7 +333,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
             // // Create a new DataTable object
             // var dataTable = new google.visualization.DataTable();
 
-            // // Create Data Columns 
+            // // Create Data Columns
             // dataTable.addColumn({type: 'string', id: 'Number'});
             // dataTable.addColumn({type: 'string', id: 'Title'});
             // dataTable.addColumn({type: 'date', id: 'Start'});
@@ -352,11 +352,11 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
             // var options = {
             //     timeline: {showRowLabels: false, barLabelStyle: { fontSize: 18 }},
             //     height: 150,
-            // };  
+            // };
 
             // // Draw Table
             // chart.draw(dataTable, options);
-            // console.log("This is my data table");   
+            // console.log("This is my data table");
             // console.log(dataTable);
 
             var arr =  [y, apiName, new Date(startDate[2], startDate[0], startDate[1]), new Date(due[2], due[0], due[1])];
@@ -365,7 +365,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
             // console.log(arrs[i][0]);
         }
     });
-} 
+}
 
 function masterTimeline(){
     console.log(arrs);
@@ -384,20 +384,26 @@ function masterTimeline(){
         // Create a new DataTable object
         var dataTable = new google.visualization.DataTable();
 
-        // Create Data Columns 
+        // Create Data Columns
 //         dataTable.addColumn({type: 'string', id: 'Number'});
 //         dataTable.addColumn({type: 'string', id: 'Title'});
 //         dataTable.addColumn({type: 'date', id: 'Start'});
 //         dataTable.addColumn({type: 'date', id: 'End'});
-        
+
         var numRows = arrs.length;
         var colRows = arrs[0].length;
-        
-        for (var i = 1; i < numCols; i++){
-            dataTable.addColumn('number', arrs[0][i]);
+
+        for (var i = 0; i < colRows; i++){
+          // if(i === 0 || i === 1){
+              dataTable.addColumn('string', arrs[0][i]);
+          // }
+
+          // if(i === 2 || i === 3){
+            // dataTable.addColumn('date', arrs[0][i])
+          // }
         }
 
-        for (var i = 1; i < numRows; i++){
+        for (var i = 0; i < numRows; i++){
             dataTable.addRow(arrs[i]);
         }
 
@@ -405,7 +411,7 @@ function masterTimeline(){
         var options = {
             title: "Master Timeline",
             timeline: {showRowLabels: false, barLabelStyle: { fontSize: 18 }},
-        };  
+        };
 
         // Draw Table
         chart.draw(dataTable, options);
@@ -447,7 +453,7 @@ function changePercent(){
         //Update start date in firebase
         var ref = firebase.database().ref("Projects/" + id);
         return ref.update(update);
-        
+
     });
 
     $('.range').on("change", function(){
@@ -466,8 +472,8 @@ function changePercent(){
         var update = {
             Percent:percent,
         };
-        
-        //Get firebase ref 
+
+        //Get firebase ref
         var ref = firebase.database().ref("Projects/" + id);
         return ref.update(update);
     });
