@@ -20,6 +20,7 @@
         // ["1", "Figure out how to use Trello", new Date(2018, 03, 02), new Date(2018, 04, 02)],
         // ["1", "Figure out how to use Trello", new Date(2018, 03, 15), new Date(2018, 04, 11)],
         // ["1", "Figure out how to use Trello", new Date(2018, 03, 24), new Date(2018, 04, 20)],
+        ["Number", "Title", "Start", "End"],
     ];
 
 function init(){
@@ -384,13 +385,21 @@ function masterTimeline(){
         var dataTable = new google.visualization.DataTable();
 
         // Create Data Columns 
-        dataTable.addColumn({type: 'string', id: 'Number'});
-        dataTable.addColumn({type: 'string', id: 'Title'});
-        dataTable.addColumn({type: 'date', id: 'Start'});
-        dataTable.addColumn({type: 'date', id: 'End'});
+//         dataTable.addColumn({type: 'string', id: 'Number'});
+//         dataTable.addColumn({type: 'string', id: 'Title'});
+//         dataTable.addColumn({type: 'date', id: 'Start'});
+//         dataTable.addColumn({type: 'date', id: 'End'});
+        
+        var numRows = arrs.length;
+        var colRows = arrs[0].length;
+        
+        for (var i = 1; i < numCols; i++){
+            dataTable.addColumn('number', arrs[0][i]);
+        }
 
-        // Give data to columns
-        dataTable.addRows(arrs);
+        for (var i = 1; i < numRows; i++){
+            dataTable.addRow(arrs[i]);
+        }
 
         // Set option to get rid of row labels
         var options = {
