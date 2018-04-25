@@ -320,7 +320,7 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
         var y = i + 1;
         // y = new String(y);
         y = '' + y;
-        console.log(y);
+        // console.log(y);
 
         // Create seperate timelines
         google.charts.load("current", {packages:["timeline"]});
@@ -328,6 +328,8 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 
         // Function callback form google.charts.setOnLoadCallback
         function drawChart(){
+// Individual Charts
+// ###################################################################################################################################################
             // // Create a new Timeline object
             // var chart = new google.visualization.Timeline(timelineDivTwo);
             // // Create a new DataTable object
@@ -356,12 +358,16 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 
             // // Draw Table
             // chart.draw(dataTable, options);
+// ###################################################################################################################################################
             // console.log("This is my data table");
             // console.log(dataTable);
+            // console.log(startDate);
+            startDate = startDate.split("/");
+            due = due.split("/");
 
             var arr =  [y, apiName, new Date(startDate[2], startDate[0], startDate[1]), new Date(due[2], due[0], due[1])];
             arrs.push(arr);
-
+            // console.log(startDate[2], startDate[0], startDate[1], startDate);
             // console.log(arrs[i][0]);
         }
     });
@@ -369,7 +375,6 @@ function startAndPercent(id, datesDiv, timelineDiv, dates, projectDiv, generalSt
 
 function masterTimeline(){
     console.log(arrs);
-    console.log(arrs[0]);
 
     // Create seperate timelines
     google.charts.load("current", {packages:["timeline"]});
@@ -384,28 +389,45 @@ function masterTimeline(){
         // Create a new DataTable object
         var dataTable = new google.visualization.DataTable();
 
-        // Create Data Columns
-//         dataTable.addColumn({type: 'string', id: 'Number'});
-//         dataTable.addColumn({type: 'string', id: 'Title'});
-//         dataTable.addColumn({type: 'date', id: 'Start'});
-//         dataTable.addColumn({type: 'date', id: 'End'});
-
         var numRows = arrs.length;
         var colRows = arrs[0].length;
 
-        for (var i = 0; i < colRows; i++){
-          // if(i === 0 || i === 1){
-              dataTable.addColumn('string', arrs[0][i]);
-          // }
+// #################  Attempt ##################################################
+        // dataTable.addColumn("string", arrs[0][0]);
+        // dataTable.addColumn("string", arrs[0][1]);
+        // dataTable.addColumn("date", arrs[0][2]);
+        // dataTable.addColumn("date", arrs[0][3]);
 
-          // if(i === 2 || i === 3){
-            // dataTable.addColumn('date', arrs[0][i])
-          // }
+        for(var i = 0; i < colRows; i++){
+          dataTable.addColumn("string", arrs[0][i]);
+// ###############  Attempt ####################################################
+        //   if(i === 0){
+        //     dataTable.addColumn({type:"string", id:arrs[0][i]});
+        //   }
+        //
+        //   if(i === 1){
+        //     dataTable.addColumn({type:"string", id:arrs[0][i]});
+        //   }
+        //
+        //   if(i === 2){
+        //     dataTable.addColumn({type:"date", id:arrs[0][i]});
+        //   }
+        //
+        //   if(i === 3){
+        //     dataTable.addColumn({type:"date", id:arrs[0][i]});
+        //   }
         }
 
-        for (var i = 0; i < numRows; i++){
-            dataTable.addRow(arrs[i]);
+// ############## Attempt ########################################################
+        // for (var i = 2; i < colRows; i++){
+        //   dataTable.addColumn("date", arrs[0][i]);
+        // }
+
+        for (var i = 1; i < numRows; i++){
+          dataTable.addRow(arrs[i]);
         }
+
+        console.log(dataTable);
 
         // Set option to get rid of row labels
         var options = {
