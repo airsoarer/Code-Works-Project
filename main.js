@@ -772,53 +772,65 @@ function occupiedDevelopers(dueTxt){
     // Occupied developers
     $('#occupied').empty();
 
-    // console.log(developer);
-    var developerSet = developer.split(" | ");
-    developerSet.pop();
-    // console.log(developerSet);
-    for(var i = 0; i < developerSet.length; i++){
+    if(developerSet === ""){
+        var noDeveloper = document.createElement("div");
+        noDeveloper.classList.add("noDeveloper");
+
+        var noH4 = document.createElement("h4");
+        noH4.textContent = "There are no Occupied Developers";
+        noDeveloper.appendChild(noH4);
+
+        document.getElementById("occupied").appendChild(noDeveloper);
+    }else{
         // console.log(developer);
-        // $('#occupied').empty();
-    
-        var developerInfo = developerSet[i].split(" . ");
-        var developerName = developerInfo[0];
-        var projectTitle = developerInfo[1];
-        var projectEnd = developerInfo[2];
+        var developerSet = developer.split(" | ");
+        developerSet.pop();
 
-        // console.log(projectTitle);
-
-        var occupiedDiv = document.createElement("div");
-        occupiedDiv.className = "occupiedDiv";
-
-        var occupiedName = document.createElement("h4");
-        occupiedName.textContent = developerName;
-        // console.log(occupiedName);
-
-        var occupiedTitle = document.createElement("h4");
-        occupiedTitle.textContent = projectTitle;
-
-        var occupiedEnd = document.createElement("h4");
-        occupiedEnd.textContent = dueTxt;
-
-        var cardTextOne = document.createElement("p");
-        cardTextOne.textContent = " is occupied working on ";
-
-        var cardTextTwo = document.createElement("p");
-        cardTextTwo.textContent = " and will be available again on ";
-
-        occupiedDiv.appendChild(occupiedName);
-        occupiedDiv.appendChild(cardTextOne);
-        occupiedDiv.appendChild(occupiedTitle);
-        occupiedDiv.appendChild(cardTextTwo);
-        occupiedDiv.appendChild(occupiedEnd);
-
-        // console.log(occupiedDiv/);
-
-        document.getElementById("occupied").appendChild(occupiedDiv);
+        // console.log(developerSet);
+        for(var i = 0; i < developerSet.length; i++){
+            // console.log(developer);
+            // $('#occupied').empty();
         
-        // console.log(cardText);
-    }
+            var developerInfo = developerSet[i].split(" . ");
+            var developerName = developerInfo[0];
+            var projectTitle = developerInfo[1];
+            var projectEnd = developerInfo[2];
 
+
+            // console.log(projectTitle);
+
+            var occupiedDiv = document.createElement("div");
+            occupiedDiv.className = "occupiedDiv";
+
+            var occupiedName = document.createElement("h4");
+            occupiedName.textContent = developerName;
+            // console.log(occupiedName);
+
+            var occupiedTitle = document.createElement("h4");
+            occupiedTitle.textContent = projectTitle;
+
+            var occupiedEnd = document.createElement("h4");
+            occupiedEnd.textContent = dueTxt;
+
+            var cardTextOne = document.createElement("p");
+            cardTextOne.textContent = " is occupied working on ";
+
+            var cardTextTwo = document.createElement("p");
+            cardTextTwo.textContent = " and will be available again on ";
+
+            occupiedDiv.appendChild(occupiedName);
+            occupiedDiv.appendChild(cardTextOne);
+            occupiedDiv.appendChild(occupiedTitle);
+            occupiedDiv.appendChild(cardTextTwo);
+            occupiedDiv.appendChild(occupiedEnd);
+
+            // console.log(occupiedDiv/);
+
+            document.getElementById("occupied").appendChild(occupiedDiv);
+            
+            // console.log(cardText);
+        }
+    }
     // $('.occupied').empty();
 }
 

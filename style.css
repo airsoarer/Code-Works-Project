@@ -211,6 +211,16 @@ li:last-of-type{
     height: 60px;
 }
 
+.noDeveloper{
+    height: 300px;
+    text-align: center;
+    box-shadow: 5px 5px 10px #5b5b5b5b;
+}
+
+.noDeveloper h4{
+    padding-top: 70px;
+}
+
 button .priority{
     /* background-color: #FFFFFF !important; */
 }
