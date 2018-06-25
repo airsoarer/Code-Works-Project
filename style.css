@@ -1,7 +1,9 @@
 body{
     width: 100% !important;
-    background-color: #F7931E;
-    color: white !important;
+    background-color: white;
+    color: black;
+    /* background-color: #F7931E; */
+    /* color: white !important; */
     font-size: 24px;
     padding: 0px;
     margin: 0px;
@@ -10,7 +12,7 @@ body{
 }
 
 button{
-    background-color: #A20BAA !important;
+    /* background-image: linear-gradient(to right, #F7621E, #F7931E); */
     border-radius: 5px;
     color: white !important;
     border: none;
@@ -18,7 +20,11 @@ button{
 }
 
 .project{
-    margin-top: 150px;
+    height: 760px;
+    margin-top: 80px;
+    /* float: right; */
+    width: 75%;
+
 }
 
 .project:first-of-type{
@@ -52,6 +58,10 @@ li:last-of-type{
     margin-bottom: 20px;
 }
 
+.descript{
+    margin-bottom: 25px !important;
+}
+
 .people{
     padding: 0px;
     margin: 0px;
@@ -77,6 +87,7 @@ li:last-of-type{
     display:none;
     height: 30px;
     margin-top: 5px;
+    margin-bottom: 10px;
     /* margin-bottom: 25px */
 }
 
@@ -84,6 +95,177 @@ li:last-of-type{
     display: none;
     margin-top: 5px;
 }
+
+#projects{
+    background-color: #FCFCFC;
+}
+
+#projects .name, #projects .percentBtn{
+    background: linear-gradient(to right, #B20000, #FF1919);
+}
+
+#finished .name, #finished .percentBtn{
+    background: linear-gradient(to right, #00B233, #17FF36);
+}
+
+.name{
+    width:  100%;
+    text-align: left;
+    color: white !important;
+    height: 60px;
+    font-weight: normal !important;
+    padding-top: 1px;
+    padding-left: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 5px 10px 10px #5b5b5b;
+}
+
+.extraInfoDisplay{
+    box-shadow: 5px 5px 10px #5b5b5b;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #FFFFFF;
+    padding-bottom: 10px;
+    /* margin-top: 10px; */
+    /* height: 580px; */
+}
+
+.datesHome{
+    width: 100% !important;
+}
+
+.datesHome div:first-of-type{
+    float: left;
+    text-align: left;
+}
+
+.datesHome div:last-of-type{
+    float: right !important;
+    text-align: right;
+}
+
+.current{
+    margin-top: 20px;
+    height: 300px;
+    overflow: auto;
+    overflow-x: scroll;
+}
+
+.currentTitleDiv{
+    width: 25%;
+    height: 250px;
+    /* padding-bottom: 15px; */
+    /* padding-top: 20px; */
+    margin-right: 10px;
+    margin-top: 10px;
+    display: inline-block;
+    box-shadow: 5px 5px 10px #5b5b5b;
+}
+
+.currentTitleDiv h4{
+    height: 100px;
+    font-weight: 500;
+    /* padding-bottom: 10px; */
+}
+
+.currentEndDateDiv{
+    padding-top: 5px;
+}
+
+.percentCurrent{
+    /* color: linear-gradient(to right, #F7621E, #F7931E); */
+}
+
+.noCurrent{
+    height: 300px;
+    text-align: center;
+    box-shadow: 5px 5px 10px #5b5b5b5b;
+}
+
+.noCurrent h4{
+    padding-top: 70px;
+    /* padding-bottom: 10px; */
+}
+
+.occupied{
+    margin-top: 20px;
+    height: 500px;
+    overflow: auto;
+    overflow-x: scroll;
+}
+
+.occupiedDiv{
+    width: 25%;
+    height: 400px;
+    /* padding-bottom: 15px; */
+    /* padding-top: 20px; */
+    margin-right: 10px;
+    margin-top: 10px;
+    display: inline-block;
+    box-shadow: 5px 5px 10px #5b5b5b;
+}
+
+.occupiedDiv h4{
+    font-size: 32px;
+    height: 60px;
+}
+
+button .priority{
+    /* background-color: #FFFFFF !important; */
+}
+
+.priority{
+    background-color: #FFFFFF !important;
+    color: #0068ff !important;
+    margin-right: 10px !important;
+}
+
+.priorityName{
+    color: #FFFFFF !important;
+    background-image: linear-gradient(to right, #0068FF, #00BCFF) !important;
+}
+
+/* .priorityOff{
+    display:none;
+    color: #FFFFFF !important;
+    background-image: linear-gradient(to right, #0068FF, #00BCFF) !important;
+} */
+
+.stuck{
+    background-color: #FFFFFF;
+    color: #FFCD1D !important;
+    margin-right: 10px !important;
+    /* padding-right: 10px !important; */ 
+}
+
+.stuckName{
+    color: #FFFFFF !important;
+    background-image: linear-gradient(to right, #FFC600, #FFCD1D) !important;
+}
+
+/* .stuckOff{
+    display:none;
+    color: #FFFFFF !important;
+    background-image: linear-gradient(to right, #FFC600, #FFCD1D);
+} */
+
+.hold{
+    background-color: #FFFFFF;
+    color: #2C3029 !important;
+    margin-right: 10px;
+}
+
+.holdName{
+    color: #FFFFFF !important;
+    background-image: linear-gradient(to right, #2C3029, #394036) !important;
+}
+
+/* .holdOff{
+    display: none;
+    color: #FFFFFF !important;
+    background-image: linear-gradient(to right, #2C3029, #394036);
+} */
 
 @keyframes fade{
     from{
@@ -104,3 +286,113 @@ li:last-of-type{
         opacity: 1;
     }
 }
+
+#master{
+    margin-top: 220px;
+    /* margin-left: 0px;  */
+    /* overflow: auto;
+    overflow-y: scroll; */
+
+}
+
+#master ul {
+    list-style: none;
+    /* position: absolute;
+    top: 50%;
+    left: 50%; */
+    transform: translate(-50%, -50%);
+    padding: 1px 100px;
+    color: #fff;
+    font-size: 13px;
+    margin-left: 250px;
+    }
+  
+  #master ul:before {
+    content: '';
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    border-left: 2px dashed #fff;
+    
+  }
+
+  #master ul li {
+    position: relative;
+    color: black;
+    /* height: 500px; */
+    margin-left: 30px ;
+    margin-bottom: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 14px;
+    border-radius: 6px;
+    width: 100% !important;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .08)
+  }
+
+  #master ul li:not(:first-child) {
+    margin-top: 60px;
+  }
+
+  #master ul li > span {
+    width: 2px;
+    height: 100%;
+    background: #fff;
+    left: -30px;
+    top: 0;
+    position: absolute;
+  }
+
+  #master ul li > span:before, #master ul li > span:after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    position: absolute;
+    background: #86b7e7;
+    left: -5px;
+    top: 0;
+  }
+
+  #master ul li span:after {
+    top: 100%;
+  }
+  #master ul li > div {
+    margin-left: 10px;  
+  }
+  #master div .title {
+    font-weight: 600;
+    font-size: 24px;
+    color: darkorange;
+  }
+
+  #master div .startDate, #master div .endDate {
+    font-weight: 300;
+    font-size: 18px;
+  }
+
+  #master div .available {
+      height: 20px;
+      width: 100%;
+  }
+
+  #master div > div {
+    margin-top: 5px;
+  }
+  #master span.dates {
+    height: 100%;
+  }
+  #master span.dates span {
+    position: absolute;
+    font-size: 16px;
+    left: -35px;
+    font-weight: bold;
+  }
+  #master span.dates span:first-child {
+    top: 0;
+  }
+  #master span.dates span:last-child {
+    top: 100%;
+  }
+
+
