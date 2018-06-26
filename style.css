@@ -15,6 +15,10 @@ body{
     #master{
         display:none;
     }
+
+    .project{
+        width: 100% !important;
+    }
 }
 
 button{
