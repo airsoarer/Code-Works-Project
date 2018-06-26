@@ -11,6 +11,12 @@ body{
     text-align: center;
 }
 
+@media screen and (orientation:portrait){
+    #master{
+        display:none;
+    }
+}
+
 button{
     /* background-image: linear-gradient(to right, #F7621E, #F7931E); */
     border-radius: 5px;
