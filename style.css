@@ -21,6 +21,12 @@ body{
     }
 }
 
+@media screen and (orientation:landscape){
+    #master ul{
+        margin-left: 100px;
+    }
+}
+
 button{
     /* background-image: linear-gradient(to right, #F7621E, #F7931E); */
     border-radius: 5px;
