@@ -39,7 +39,7 @@
 
 function init(){
     firebase.initializeApp(config);
-    $(document).on("orientationchange", function(e){
+    $(window).on("orientationchange", function(e){
         switch(window.orientation){
             case -90: case 90:
             $(".project").removeClass("col");
@@ -50,7 +50,7 @@ function init(){
 
             break
             default:
-            
+
         }
     })
     $.getJSON("https://api.trello.com/1/boards/6PVLjz20/?key=ad18609bec500062f9944b092d1601de&token=8a16dca9b23c590fdd6819d5b3123a3656eec64fba10bafd5f84f9cc44369b48&cards=all", function(results){
