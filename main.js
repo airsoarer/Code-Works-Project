@@ -200,6 +200,7 @@ function init(){
             var h4 = document.createElement("h4");
             h4.textContent = "Description:";
             h4.classList.add("txt");
+            h4.classList.add("truncate");
             $(h4).css("color", "#474b4f")
             $(h4).css("font-weight", "bold");
             var projectDescription = document.createElement("h5");
@@ -595,13 +596,15 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
     // Surronding ul
    var ul = document.createElement("ul");
    ul.classList.add("row");
+//    ul.classList.add("col");
+//    ul.classList.add("s12");
    ul.classList.add("ul");
 
    // Project li
    var li = document.createElement("li");
    li.id = id + "project";
    li.classList.add("col");
-   li.classList.add("s12");
+   li.classList.add("s6");
    ul.appendChild(li);
    
    // Project empty span
@@ -719,12 +722,12 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
 
             var titleDiv = document.createElement("div");
             div.id = id + "currentTitleDiv";
-            div.className = "currentTitleDiv";
+            div.classList.add("currentTitleDiv");
             div.appendChild(titleDiv);
 
             var title = document.createElement("h4");
             title.textContent = apiName;
-            // title.classList.add("truncate");
+            title.classList.add("truncate");
             titleDiv.appendChild(title);
 
             var endDateDiv = document.createElement("div");
@@ -808,6 +811,7 @@ function occupiedDevelopers(dueTxt){
 
             var occupiedTitle = document.createElement("h4");
             occupiedTitle.textContent = projectTitle;
+            occupiedTitle.classList.add("truncate");
 
             var occupiedEnd = document.createElement("h4");
             occupiedEnd.textContent = dueTxt;
@@ -921,7 +925,7 @@ function priority(){
     var id = $(this).attr('id');
     id = id.split("priority");
     id = id[0];
-    console.log(id);
+    // console.log(id);
     
     var ref = firebase.database().ref("Projects/" + id);
     var data = {
@@ -945,7 +949,7 @@ function priorityName(){
     var data = {
         Priority:false,
     }
-    console.log(data);
+    // console.log(data);
 
     $(this).removeClass("priorityName");
     $(this).addClass("priority");

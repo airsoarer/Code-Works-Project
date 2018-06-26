@@ -19,12 +19,22 @@ button{
     padding: 5px;
 }
 
+h5{
+    font-size: 20px !important;
+}
+
 .project{
     height: 760px;
-    margin-top: 80px;
+    /* margin-bottom: 20px; */
+    /* margin-top: 80px; */
     /* float: right; */
     width: 75%;
 
+}
+
+.project{
+    margin-bottom: 120px !important;
+    /* margin-left: 100px; */
 }
 
 .project:first-of-type{
@@ -47,7 +57,7 @@ ul{
 
 li{
     margin: 30px;
-    font-size: 24px;  
+    font-size: 20px;  
 }
 
 li:first-of-type{
@@ -153,7 +163,7 @@ li:last-of-type{
 }
 
 .currentTitleDiv{
-    width: 25%;
+    width: 33%;
     height: 250px;
     /* padding-bottom: 15px; */
     /* padding-top: 20px; */
@@ -196,9 +206,9 @@ li:last-of-type{
 }
 
 .occupiedDiv{
-    width: 25%;
+    width: 33%;
     height: 400px;
-    /* padding-bottom: 15px; */
+    padding-bottom: 50px;
     /* padding-top: 20px; */
     margin-right: 10px;
     margin-top: 10px;
@@ -209,6 +219,10 @@ li:last-of-type{
 .occupiedDiv h4{
     font-size: 32px;
     height: 60px;
+}
+
+.occupiedDiv p:last-of-type{
+    margin-top: 15px;
 }
 
 .noDeveloper{
@@ -314,7 +328,7 @@ button .priority{
     padding: 1px 100px;
     color: #fff;
     font-size: 13px;
-    margin-left: 250px;
+    margin-left: 150px;
     }
   
   #master ul:before {
