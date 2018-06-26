@@ -39,20 +39,25 @@
 
 function init(){
     firebase.initializeApp(config);
-    $(window).on("orientationchange", function(e){
-        switch(window.orientation){
-            case -90: case 90:
+    $( window ).on( "orientationchange", function( event ) {
+        // alert(window.orientation);
+        if(window.orientation === 0){
             $(".project").removeClass("col");
             $(".project").removeClass("s8");
 
             $(".project").addClass("col");
             $(".project").addClass("s12");
-
-            break
-            default:
-
         }
-    })
+
+        if(window.orientation === 90){
+            $(".project").removeClass("col");
+            $(".project").removeClass("s12");
+
+            $(".project").addClass("col");
+            $(".project").addClass("s8");
+        }
+    });
+
     $.getJSON("https://api.trello.com/1/boards/6PVLjz20/?key=ad18609bec500062f9944b092d1601de&token=8a16dca9b23c590fdd6819d5b3123a3656eec64fba10bafd5f84f9cc44369b48&cards=all", function(results){
         for(var i = 0; i < results.cards.length; i++){
             closed = results.cards[i].closed;
