@@ -26,6 +26,8 @@
     var stuck;
     var hold;
 
+    var y = 0;
+
     // Array to hold arrays
     var arrs = [
         // ["Number", "Title", "Start", "End"],
@@ -300,6 +302,11 @@ function init(){
     $(document.body).on('click', '.stuckName', stuckName);
     $(document.body).on('click', '.hold', hold);
     $(document.body).on('click', '.holdName', holdName);
+    // $(document.body).on("click", "#refresh", function(){
+    //     console.log("wokring");
+    //     init();
+    // });
+    // occupiedDevelopers();
 }
 
 function startAndPercent(id, dueTxt, i, results, datesDiv, timelineDiv, dates, projectDiv, generalStart, due, i, apiName){
@@ -770,7 +777,11 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
 
             document.getElementById("current").appendChild(div);
             
-            occupiedDevelopers(dueTxt);
+            if(y === 0){
+                occupiedDevelopers(dueTxt);
+            }
+
+            y = 1;
         }else{
             var noCurrent = document.createElement("div");
             noCurrent.id = id + "noCurrent";
@@ -793,6 +804,7 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
 function occupiedDevelopers(dueTxt){
     // Occupied developers
     $('#occupied').empty();
+    // console.log("occupied");
 
     if(developerSet === ""){
         var noDeveloper = document.createElement("div");
@@ -807,16 +819,20 @@ function occupiedDevelopers(dueTxt){
         // console.log(developer);
         var developerSet = developer.split(" | ");
         developerSet.pop();
+        // console.log(developerSet.length);
 
         // console.log(developerSet);
         for(var i = 0; i < developerSet.length; i++){
+            // console.log(developerSet[i]);
             // console.log(developer);
             // $('#occupied').empty();
+            // console.log(i);
         
             var developerInfo = developerSet[i].split(" . ");
             var developerName = developerInfo[0];
             var projectTitle = developerInfo[1];
             var projectEnd = developerInfo[2];
+            // console.log(projectEnd);
 
 
             // console.log(projectTitle);
@@ -833,7 +849,8 @@ function occupiedDevelopers(dueTxt){
             occupiedTitle.classList.add("truncate");
 
             var occupiedEnd = document.createElement("h4");
-            occupiedEnd.textContent = dueTxt;
+            occupiedEnd.textContent = projectEnd;
+            // console.log(dueTxt);
 
             var cardTextOne = document.createElement("p");
             cardTextOne.textContent = " is occupied working on ";
