@@ -72,11 +72,15 @@ h5{
     text-transform: capitalize;
 }
 
-.occupiedTitle:first-letter{
+#occupiedTitle:first-letter{
     text-transform: capitalize;
 }
 
 .title:first-letter{
+    text-transform: capitalize;
+}
+
+.currentTitleDiv:first-letter{
     text-transform: capitalize;
 }
 

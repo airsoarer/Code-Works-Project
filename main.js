@@ -846,6 +846,8 @@ function occupiedDevelopers(dueTxt){
 
             var occupiedTitle = document.createElement("h4");
             occupiedTitle.textContent = projectTitle;
+            // occupiedTitle.classList.add("occupiedTitle");
+            occupiedTitle.id = "occupiedTitle";
             occupiedTitle.classList.add("truncate");
 
             var occupiedEnd = document.createElement("h4");
