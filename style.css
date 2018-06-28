@@ -283,6 +283,17 @@ button .priority{
     background-image: linear-gradient(to right, #0068FF, #00BCFF) !important;
 }
 
+.priorityName:hover{
+    color: #FFFFFF !important;
+    background-image: linear-gradient(to right, #0068FF, #00BCFF) !important;
+}
+
+.priority:hover{
+    transition-duration: .2s;
+    border-bottom: solid 2px #0068ff;
+    border-left: solid 2px #0068ff;
+}
+
 /* .priorityOff{
     display:none;
     color: #FFFFFF !important;
@@ -301,6 +312,17 @@ button .priority{
     background-image: linear-gradient(to right, #FFC600, #FFCD1D) !important;
 }
 
+.stuckName:hover{
+    color: #FFFFFF !important;
+    background-image: linear-gradient(to right, #FFC600, #FFCD1D) !important;
+}
+
+.stuck:hover{
+    transition-duration: .2s;
+    border-bottom: 2px solid #FFC600;
+    border-left: 2px solid #FFC600;
+}
+
 /* .stuckOff{
     display:none;
     color: #FFFFFF !important;
@@ -316,6 +338,17 @@ button .priority{
 .holdName{
     color: #FFFFFF !important;
     background-image: linear-gradient(to right, #2C3029, #394036) !important;
+}
+
+.holdName:hover{
+    color: #FFFFFF !important;
+    background-image: linear-gradient(to right, #2C3029, #394036) !important;
+}
+
+.hold:hover{
+    transition-duration: .2s;
+    border-bottom: 2px solid #2C3029;
+    border-left: 2px solid #2C3029;
 }
 
 /* .holdOff{
