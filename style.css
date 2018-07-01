@@ -188,10 +188,12 @@ li:last-of-type{
     text-align: right;
 }
 
-.current{
+.currentHome{
+    width: auto;
     margin-top: 20px;
     height: 300px;
     overflow: auto;
+    /* overflow-y: hidden; */
     overflow-x: scroll;
 }
 
@@ -231,7 +233,7 @@ li:last-of-type{
     /* padding-bottom: 10px; */
 }
 
-.occupied{
+.occupiedHome{
     margin-top: 20px;
     height: 500px;
     overflow: auto;
@@ -259,7 +261,7 @@ li:last-of-type{
 }
 
 .noDeveloper{
-    height: 300px;
+    height: 400px;
     text-align: center;
     box-shadow: 5px 5px 10px #5b5b5b5b;
 }
@@ -286,12 +288,14 @@ button .priority{
 .priorityName:hover{
     color: #FFFFFF !important;
     background-image: linear-gradient(to right, #0068FF, #00BCFF) !important;
+    box-sizing: border-box
 }
 
 .priority:hover{
     transition-duration: .2s;
     border-bottom: solid 2px #0068ff;
     border-left: solid 2px #0068ff;
+    box-sizing: border-box;
 }
 
 /* .priorityOff{
@@ -315,6 +319,7 @@ button .priority{
 .stuckName:hover{
     color: #FFFFFF !important;
     background-image: linear-gradient(to right, #FFC600, #FFCD1D) !important;
+    box-sizing: border-box;
 }
 
 .stuck:hover{
@@ -343,6 +348,7 @@ button .priority{
 .holdName:hover{
     color: #FFFFFF !important;
     background-image: linear-gradient(to right, #2C3029, #394036) !important;
+    box-sizing: border-box;
 }
 
 .hold:hover{

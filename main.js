@@ -539,18 +539,19 @@ function startAndPercent(id, dueTxt, i, results, datesDiv, timelineDiv, dates, p
             ref.on("value", function(snapshot){
                 var data = snapshot.val();
                 // console.log(data);
-
-                if(data.Priority === true){
-                    priorityBtn.classList.add("priorityName");
-                }
-                
-                if(data.Stuck === true){
-                    stuckBtn.classList.add("stuckName");
-                    // console.log("stuck", stuckBtn);
-                }
-                
-                if(data.Hold === true){
-                    holdBtn.classList.add("holdName");
+                if(data != null){
+                    if(data.Priority === true){
+                        priorityBtn.classList.add("priorityName");
+                    }
+                    
+                    if(data.Stuck === true){
+                        stuckBtn.classList.add("stuckName");
+                        // console.log("stuck", stuckBtn);
+                    }
+                    
+                    if(data.Hold === true){
+                        holdBtn.classList.add("holdName");
+                    }   
                 }
             });
 
@@ -738,8 +739,11 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
 
         if((mm > startMM && mm < endMM)||
         (mm === startMM && mm === endMM)||
-        (mm === startMM && mm < endMM)){
-            // console.log("working in current");
+        (mm === startMM && mm < endMM) && 
+        (dd > startDD && dd < endDD) ||
+        (dd === startDD && dd < endDD) &&
+        (yyyy <= endYY)){
+            console.log(apiName);
             currentArr.push(i);
 
             var div = document.createElement("div");
@@ -776,6 +780,7 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
             currentPercentDiv.appendChild(percentTxt);
 
             document.getElementById("current").appendChild(div);
+            // console.log(developerSet);
             
             if(y === 0){
                 occupiedDevelopers(dueTxt);
@@ -796,6 +801,16 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
             if((i + 1) === results.cards.length && currentArr.length === 0){
                 // console.log("working a second time");
                 document.getElementById("current").appendChild(noCurrent);
+                
+                var noDeveloper = document.createElement("div");
+                noDeveloper.classList.add("noDeveloper");
+        
+                var noH4 = document.createElement("h4");
+                noH4.textContent = "There are no Occupied Developers";
+                noDeveloper.appendChild(noH4);
+        
+                document.getElementById("occupied").appendChild(noDeveloper);
+                
             }
         }
     }
@@ -804,76 +819,55 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
 function occupiedDevelopers(dueTxt){
     // Occupied developers
     $('#occupied').empty();
-    // console.log("occupied");
+    
+    // console.log(developer);
+    var developerSet = developer.split(" | ");
+    developerSet.pop();
+    // console.log(developerSet.length);
 
-    if(developerSet === ""){
-        var noDeveloper = document.createElement("div");
-        noDeveloper.classList.add("noDeveloper");
-
-        var noH4 = document.createElement("h4");
-        noH4.textContent = "There are no Occupied Developers";
-        noDeveloper.appendChild(noH4);
-
-        document.getElementById("occupied").appendChild(noDeveloper);
-    }else{
-        // console.log(developer);
-        var developerSet = developer.split(" | ");
-        developerSet.pop();
-        // console.log(developerSet.length);
-
-        // console.log(developerSet);
-        for(var i = 0; i < developerSet.length; i++){
-            // console.log(developerSet[i]);
-            // console.log(developer);
-            // $('#occupied').empty();
-            // console.log(i);
-        
-            var developerInfo = developerSet[i].split(" . ");
-            var developerName = developerInfo[0];
-            var projectTitle = developerInfo[1];
-            var projectEnd = developerInfo[2];
-            // console.log(projectEnd);
+    // console.log(developerSet);
+    for(var i = 0; i < developerSet.length; i++){
+    
+        var developerInfo = developerSet[i].split(" . ");
+        var developerName = developerInfo[0];
+        var projectTitle = developerInfo[1];
+        var projectEnd = developerInfo[2];
+        // console.log(projectEnd);
 
 
-            // console.log(projectTitle);
+        // console.log(projectTitle);
 
-            var occupiedDiv = document.createElement("div");
-            occupiedDiv.className = "occupiedDiv";
+        var occupiedDiv = document.createElement("div");
+        occupiedDiv.className = "occupiedDiv";
 
-            var occupiedName = document.createElement("h4");
-            occupiedName.textContent = developerName;
-            // console.log(occupiedName);
+        var occupiedName = document.createElement("h4");
+        occupiedName.textContent = developerName;
+        // console.log(occupiedName);
 
-            var occupiedTitle = document.createElement("h4");
-            occupiedTitle.textContent = projectTitle;
-            // occupiedTitle.classList.add("occupiedTitle");
-            occupiedTitle.id = "occupiedTitle";
-            occupiedTitle.classList.add("truncate");
+        var occupiedTitle = document.createElement("h4");
+        occupiedTitle.textContent = projectTitle;
+        // occupiedTitle.classList.add("occupiedTitle");
+        occupiedTitle.id = "occupiedTitle";
+        occupiedTitle.classList.add("truncate");
 
-            var occupiedEnd = document.createElement("h4");
-            occupiedEnd.textContent = projectEnd;
-            // console.log(dueTxt);
+        var occupiedEnd = document.createElement("h4");
+        occupiedEnd.textContent = projectEnd;
+        // console.log(dueTxt);
 
-            var cardTextOne = document.createElement("p");
-            cardTextOne.textContent = " is occupied working on ";
+        var cardTextOne = document.createElement("p");
+        cardTextOne.textContent = " is occupied working on ";
 
-            var cardTextTwo = document.createElement("p");
-            cardTextTwo.textContent = " and will be available again on ";
+        var cardTextTwo = document.createElement("p");
+        cardTextTwo.textContent = " and will be available again on ";
 
-            occupiedDiv.appendChild(occupiedName);
-            occupiedDiv.appendChild(cardTextOne);
-            occupiedDiv.appendChild(occupiedTitle);
-            occupiedDiv.appendChild(cardTextTwo);
-            occupiedDiv.appendChild(occupiedEnd);
+        occupiedDiv.appendChild(occupiedName);
+        occupiedDiv.appendChild(cardTextOne);
+        occupiedDiv.appendChild(occupiedTitle);
+        occupiedDiv.appendChild(cardTextTwo);
+        occupiedDiv.appendChild(occupiedEnd);
 
-            // console.log(occupiedDiv/);
-
-            document.getElementById("occupied").appendChild(occupiedDiv);
-            
-            // console.log(cardText);
-        }
+        document.getElementById("occupied").appendChild(occupiedDiv);
     }
-    // $('.occupied').empty();
 }
 
 function changePercent(){
