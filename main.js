@@ -266,6 +266,8 @@ function init(){
                         var dd = date.getDate();
                         var mm = date.getMonth() + 1;
 
+                        date.setHours(0,0,0,0);
+
                         var splitEnd = due.split("/");
                         var endMM = splitEnd[0];
                         endMM = Number(endMM);
@@ -274,10 +276,10 @@ function init(){
                         var endYY = splitEnd[2];
                         endYY = Number(endYY);
 
-                        // console.log(due:);
-                        // console.log(endMM);
+                        // console.log(due);
+                        var dueNew = new Date(endMM + "-" + endDD + "-" + endYY);
 
-                        if(mm <= endMM){
+                        if(dueNew > date){
                             developer += contributors + " . " + apiName + " . " + due + " | ";
                             // console.log(developer);
                         }
@@ -620,6 +622,9 @@ function startAndPercent(id, dueTxt, i, results, datesDiv, timelineDiv, dates, p
 }
 
 function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timelineDiv, dates, projectDiv, generalStart, due, i, apiName, startDate){
+    // console.log(due[2]);
+    var importantDue = new Date(due[0] + "-" + due[1] + "-" + due[2]);
+    // console.log(importantDue);
     // Surronding ul
    var ul = document.createElement("ul");
    ul.classList.add("row");
@@ -683,6 +688,8 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
    var dd = date.getDate();
    var mm = date.getMonth() + 1;
 
+   date.setHours(0,0,0,0);
+
    var splitStart = startDate.split("/");
    var startMM = splitStart[0];
    startMM = Number(startMM);
@@ -699,11 +706,7 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
    var endYY = splitEnd[2];
    endYY = Number(endYY);
 
-   if((mm > startMM && mm < endMM)||
-    (mm === startMM && mm === endMM)||
-    (mm === startMM && mm < endMM) && 
-    (dd > startDD && dd < endDD) ||
-    (dd === startDD && dd < endDD)){
+   if(importantDue > date){
        $(availableDiv).css('background', 'linear-gradient(to right, #B20000, #FF1919)');
     //    console.log("working");
    }else{
@@ -737,13 +740,14 @@ function masterTimeline(id, dueTxt, startDateTxt, i, results, datesDiv, timeline
         var dd = date.getDate();
         var mm = date.getMonth() + 1;
 
-        if((mm > startMM && mm < endMM)||
-        (mm === startMM && mm === endMM)||
-        (mm === startMM && mm < endMM) && 
-        (dd > startDD && dd < endDD) ||
-        (dd === startDD && dd < endDD) &&
-        (yyyy <= endYY)){
-            console.log(apiName);
+        date.setHours(0,0,0,0);
+        // console.log(date);
+        // if(importantDue > date){
+        //     console.log(apiName);
+        // }
+
+        if(importantDue > date){
+            // console.log(apiName);
             currentArr.push(i);
 
             var div = document.createElement("div");
