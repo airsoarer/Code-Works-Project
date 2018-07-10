@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="timeline.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Projects - HOME</title>
+    
+        <!-- Scripts -->
+        <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+        <div class="topBar">
+            <h1 style="color:darkorange"><b>Projects</b></h1>
+        </div>
+        <div class="col s12" class="buttons">
+            <button class="col s4" id="toggleUnfinished" style="background-image: linear-gradient(to right, #F7621E, #F7931E);">Toggle Unfinished Projects</button>
+            <button class="col s4" id="toggleFinished" style="background-image: linear-gradient(to right, #F7621E, #F7931E);">Toggle Finished Projects</button>
+        </div>
+        <div class="row content">
+            <!-- Div for current Projects -->
+            <div class="currentHome" id="current">
+                
+            </div>
+
+            <!-- Div for occupied Developers -->
+            <div class="occupiedHome" id="occupied">
+
+            </div>
+
+            <!-- Div for master timeline -->
+            <div class="col s4" class="row" id="master">
+
+            </div>
+
+            <div class="col s8 project">
+                <!-- Div to populate with projects -->
+                <div class="row" class="projects" id="projects" style="display:block;">
+                    <h3 style="text-align:center; padding-top:10px;"><b>Unfinished Projects</b></h3>
+                </div>
+                <!-- Div for finished projects -->
+                <div class="row" class="finished" id="finished" style="background-color:#FCFCFC; padding-top: 5px; display:block;">
+                    <h3 style="text-align:center;margin-left:5px;margin-top: 10px;"><b>Finished Projects</b></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="vis.js"></script>
+<script src="main.js"></script>
+</html>
